@@ -6,6 +6,7 @@ import 'package:pharmacy_clients/firebase_options.dart';
 import 'package:pharmacy_clients/views/screens/register_screen.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
@@ -19,6 +20,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
         textTheme: GoogleFonts.cairoTextTheme(Theme.of(context).textTheme),
