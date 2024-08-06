@@ -9,7 +9,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:810747540971:android:f22656899714b0ee61d5ae",
         "android_client_info": {
-          "package_name": "com.example.pharmacy"
+          "package_name": "com.example.pharmacy_clients"
         }
       },
       "oauth_client": [],
