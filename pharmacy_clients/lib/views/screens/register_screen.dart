@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -65,6 +67,8 @@ class _RegisterState extends State<RegisterScreen> {
           return;
         }
         if (email.isNotEmpty && password.isNotEmpty && name.isNotEmpty) {
+          var random = Random();
+          var userid = name + random.nextInt(1000).toString();
           isloading = true;
           setState(() {});
           // register user in auth with email and password
@@ -75,12 +79,9 @@ class _RegisterState extends State<RegisterScreen> {
           );
           //==== add user to your  firestore database=================
 
-          await FirebaseFirestore.instance
-              .collection("users")
-              .doc(cred.user!.uid)
-              .set({
+          await FirebaseFirestore.instance.collection("users").doc(userid).set({
             'name': name,
-            'uid': cred.user!.uid,
+            'uid': userid,
             'email': email,
           });
 
@@ -89,7 +90,7 @@ class _RegisterState extends State<RegisterScreen> {
           // Get.snackbar("👍", "تم التسجيل بنجاح",
           //     backgroundColor: Colors.white, colorText: Colors.red);
 
-          // Get.offAll(() => const MainScreen());
+          Get.offAll(() => const LoginScreen());
         } else {
           Get.snackbar("😒", "تأكد من ملىء جميع الخانات",
               backgroundColor: Colors.white, colorText: Colors.red);

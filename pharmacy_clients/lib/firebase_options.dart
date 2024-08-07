@@ -44,39 +44,39 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyDYXxHriPy-2sYDDYIYr6jF30eLtmxuJxE',
-    appId: '1:810747540971:web:dff05f29c166e9ac61d5ae',
-    messagingSenderId: '810747540971',
-    projectId: 'pharmacyclients-db9a4',
-    authDomain: 'pharmacyclients-db9a4.firebaseapp.com',
-    storageBucket: 'pharmacyclients-db9a4.appspot.com',
-    measurementId: 'G-8D7Y7BW3Z7',
+    apiKey: 'AIzaSyAdJ0IiYcEWmkL28HC-qRUjsL7zLWnwAWw',
+    appId: '1:918372304242:web:4d770bbdd882b459cb09eb',
+    messagingSenderId: '918372304242',
+    projectId: 'pharmacyclients-db839',
+    authDomain: 'pharmacyclients-db839.firebaseapp.com',
+    storageBucket: 'pharmacyclients-db839.appspot.com',
+    measurementId: 'G-TZF6LLF6PT',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyCwrYAH8Me7Xun0XnxYy8n-9693Z5MoTpo',
-    appId: '1:810747540971:android:f22656899714b0ee61d5ae',
-    messagingSenderId: '810747540971',
-    projectId: 'pharmacyclients-db9a4',
-    storageBucket: 'pharmacyclients-db9a4.appspot.com',
+    apiKey: 'AIzaSyDqDtZEmorWyt9EkhIqj_ee8B4sik84N7E',
+    appId: '1:918372304242:android:896056d460fd126ccb09eb',
+    messagingSenderId: '918372304242',
+    projectId: 'pharmacyclients-db839',
+    storageBucket: 'pharmacyclients-db839.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyAdn0f6cNV8lEfa3SQ2FM5sbQqDCGKW02w',
-    appId: '1:810747540971:ios:24332584e7048d9361d5ae',
-    messagingSenderId: '810747540971',
-    projectId: 'pharmacyclients-db9a4',
-    storageBucket: 'pharmacyclients-db9a4.appspot.com',
+    apiKey: 'AIzaSyDPT_L__OP-cIRpfScSDR1IJHNr5MeR2ZQ',
+    appId: '1:918372304242:ios:892118797d14f1adcb09eb',
+    messagingSenderId: '918372304242',
+    projectId: 'pharmacyclients-db839',
+    storageBucket: 'pharmacyclients-db839.appspot.com',
     iosBundleId: 'com.example.pharmacyClients',
   );
 
   static const FirebaseOptions windows = FirebaseOptions(
-    apiKey: 'AIzaSyDYXxHriPy-2sYDDYIYr6jF30eLtmxuJxE',
-    appId: '1:810747540971:web:72d5bd9c0ac96ce461d5ae',
-    messagingSenderId: '810747540971',
-    projectId: 'pharmacyclients-db9a4',
-    authDomain: 'pharmacyclients-db9a4.firebaseapp.com',
-    storageBucket: 'pharmacyclients-db9a4.appspot.com',
-    measurementId: 'G-R4WWELS566',
+    apiKey: 'AIzaSyAdJ0IiYcEWmkL28HC-qRUjsL7zLWnwAWw',
+    appId: '1:918372304242:web:e2797190502ae0bacb09eb',
+    messagingSenderId: '918372304242',
+    projectId: 'pharmacyclients-db839',
+    authDomain: 'pharmacyclients-db839.firebaseapp.com',
+    storageBucket: 'pharmacyclients-db839.appspot.com',
+    measurementId: 'G-NCQDJ0TY8J',
   );
 }

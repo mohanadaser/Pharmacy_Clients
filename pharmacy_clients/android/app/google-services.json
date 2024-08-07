@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "810747540971",
-    "project_id": "pharmacyclients-db9a4",
-    "storage_bucket": "pharmacyclients-db9a4.appspot.com"
+    "project_number": "918372304242",
+    "project_id": "pharmacyclients-db839",
+    "storage_bucket": "pharmacyclients-db839.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:810747540971:android:f22656899714b0ee61d5ae",
+        "mobilesdk_app_id": "1:918372304242:android:896056d460fd126ccb09eb",
         "android_client_info": {
           "package_name": "com.example.pharmacy_clients"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyCwrYAH8Me7Xun0XnxYy8n-9693Z5MoTpo"
+          "current_key": "AIzaSyDqDtZEmorWyt9EkhIqj_ee8B4sik84N7E"
         }
       ],
       "services": {
