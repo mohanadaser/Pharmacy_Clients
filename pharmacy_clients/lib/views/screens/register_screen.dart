@@ -67,8 +67,9 @@ class _RegisterState extends State<RegisterScreen> {
           return;
         }
         if (email.isNotEmpty && password.isNotEmpty && name.isNotEmpty) {
-          var random = Random();
-          var userid = name + random.nextInt(1000).toString();
+          // var random = Random();
+          // var userid = name + random.nextInt(1000).toString();
+         
           isloading = true;
           setState(() {});
           // register user in auth with email and password
@@ -79,9 +80,12 @@ class _RegisterState extends State<RegisterScreen> {
           );
           //==== add user to your  firestore database=================
 
-          await FirebaseFirestore.instance.collection("users").doc(userid).set({
+          await FirebaseFirestore.instance
+              .collection("users")
+              .doc(cred.user!.uid)
+              .set({
             'name': name,
-            'uid': userid,
+            'uid': cred.user!.uid,
             'email': email,
           });
 

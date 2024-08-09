@@ -1,3 +1,6 @@
+import 'dart:developer';
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -6,6 +9,7 @@ import 'package:pharmacy_clients/firebase_options.dart';
 import 'package:pharmacy_clients/views/screens/register_screen.dart';
 
 import 'controller/clients_controller.dart';
+import 'views/screens/clients_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -45,7 +49,31 @@ class MyApp extends StatelessWidget {
 
         useMaterial3: true,
       ),
-      home: const RegisterScreen(),
+      home:  StreamBuilder(
+        stream: FirebaseAuth.instance.authStateChanges(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const CircularProgressIndicator();
+          }
+          if (snapshot.hasError) {
+            return const Text("there Error");
+          }
+          // ignore: unnecessary_null_comparison
+          if (snapshot.data == null) {
+            return const RegisterScreen();
+          }
+          if (snapshot.hasData) {
+            log(snapshot.data.toString());
+            return const ClientsScreen();
+          }
+          return const Text("");
+        },
+      ),
+      // home: RegisterScreen(),
+     // builder: EasyLoading.init(),
+      //getPages: [GetPage(name: '/home', page: () => HomeScreen())],
     );
+
+    
   }
 }

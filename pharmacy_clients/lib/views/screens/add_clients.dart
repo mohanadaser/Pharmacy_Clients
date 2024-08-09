@@ -13,8 +13,6 @@ class AddClients extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double w = MediaQuery.of(context).size.width;
-    double h = MediaQuery.of(context).size.height;
     return Scaffold(
         backgroundColor: HexColor('efeee5'),
         appBar: AppBar(
@@ -31,6 +29,7 @@ class AddClients extends StatelessWidget {
         body: GetBuilder<AddClientsController>(
           builder: (AddClientsController controller) => SingleChildScrollView(
               child: Container(
+            width: Get.width,
             margin: const EdgeInsets.all(10),
             child: Directionality(
               textDirection: TextDirection.rtl,
@@ -68,7 +67,7 @@ class AddClients extends StatelessWidget {
                   "اضف شركه",
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
-                const SizedBox(height: 10.0),
+                const SizedBox(height: 20.0),
                 const FirebaseDropdownMenuItem(),
                 const SizedBox(height: 20.0),
                 ElevatedButton(
