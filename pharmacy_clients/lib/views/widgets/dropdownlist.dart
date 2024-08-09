@@ -1,6 +1,5 @@
-import 'dart:math';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pharmacy_clients/controller/clients_controller.dart';
@@ -20,10 +19,10 @@ class _FirebaseDropdownMenuItemState extends State<FirebaseDropdownMenuItem> {
     return StreamBuilder<QuerySnapshot>(
         stream: FirebaseFirestore.instance
             .collection("users")
-            .doc(controller.currentuser)
+            .doc(FirebaseAuth.instance.currentUser?.uid)
             .collection("companies")
             .snapshots(),
-        builder: (context, snapshot) {
+        builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(
               child: Text("Some error occured ${snapshot.error}"),
@@ -34,8 +33,22 @@ class _FirebaseDropdownMenuItemState extends State<FirebaseDropdownMenuItem> {
               child: Text("Some error occured ${snapshot.error}"),
             );
           } else {
+            List<DropdownMenuItem> companiesname = [];
             if (!snapshot.hasData) {
               return const CircularProgressIndicator();
+            }
+            final selectcompany = snapshot.data?.docs.reversed.toList();
+            if (selectcompany != null) {
+              for (var company in selectcompany) {
+                companiesname.add(
+                  DropdownMenuItem(
+                    value: company['companyname'],
+                    child: Text(
+                      company['companyname'],
+                    ),
+                  ),
+                );
+              }
             }
             return DropdownButton(
               underline: Container(
@@ -44,18 +57,16 @@ class _FirebaseDropdownMenuItemState extends State<FirebaseDropdownMenuItem> {
               ),
               borderRadius: BorderRadius.circular(12),
               dropdownColor: Colors.white,
+              isExpanded: false,
+              hint: const Text("اختر اسم الشركه"),
+              items: companiesname,
               value: controller.selectedValue.isNotEmpty
                   ? controller.selectedValue
                   : null,
-              isExpanded: false,
-              hint: const Text("اختر اسم الشركه"),
-              items: snapshot.data!.docs
-                  .map((e) => DropdownMenuItem<String>(
-                      value: e['compid'], child: Text(e['companyname'])))
-                  .toList(),
               onChanged: (value) {
                 setState(() {
                   controller.selectedValue = value.toString();
+                  print(controller.selectedValue);
                 });
               },
             );
