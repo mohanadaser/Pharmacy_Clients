@@ -1,10 +1,7 @@
-import 'dart:ffi';
-import 'dart:io';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
@@ -16,12 +13,17 @@ class AddClientsController extends GetxController {
   TextEditingController goverment = TextEditingController();
   TextEditingController addcompany = TextEditingController();
   TextEditingController amount = TextEditingController();
+  TextEditingController searchname = TextEditingController();
   final formKey = GlobalKey<FormState>();
+  List<QueryDocumentSnapshot> data = [];
+  //List<QueryDocumentSnapshot> clientslist = [];
+  bool isLoading = true;
 
   @override
   void onInit() {
+    getclients();
     clearController();
-    selectedValue = addcompany.text;
+    selectedValue = "";
     currentuser;
     super.onInit();
   }
@@ -33,10 +35,27 @@ class AddClientsController extends GetxController {
     goverment.dispose();
     addcompany.dispose();
     amount.dispose();
+    searchname.dispose();
     super.dispose();
   }
 
-  //======================validation===============================
+  //======================Get Clients===============================
+  void getclients() async {
+    try {
+      data.clear();
+      QuerySnapshot q = await FirebaseFirestore.instance
+          .collection("users")
+          .doc(currentuser)
+          .collection("clients")
+          .get();
+
+      data.addAll(q.docs);
+      isLoading = false;
+      update();
+    } on FirebaseException catch (e) {
+      Get.snackbar("faild", e.toString(), colorText: Colors.red);
+    }
+  }
 
   //============اضافة الشركات==================
   void addCompanies(userid) async {
@@ -52,6 +71,7 @@ class AddClientsController extends GetxController {
       //     backgroundColor: Colors.deepPurple, colorText: Colors.white);
 
       update();
+      selectedValue = "";
     } on FirebaseException catch (e) {
       Get.snackbar("faild", e.toString(), colorText: Colors.red);
     }
@@ -60,9 +80,9 @@ class AddClientsController extends GetxController {
 
   void addClients(userid) async {
     try {
-      final number = double.parse(amount.text);
-      final curency = NumberFormat.currency(locale: 'ar_EG', symbol: 'ج.م.');
-      final formattedCurrency = curency.format(number);
+      // final number = double.parse(amount.text);
+      // final curency = NumberFormat.currency(locale: 'ar_EG', symbol: 'ج.م.');
+      // final formattedCurrency = curency.format(number);
       await FirebaseFirestore.instance
           .collection("users")
           .doc(userid)
@@ -71,11 +91,12 @@ class AddClientsController extends GetxController {
         "name": name.text,
         "phone": phone.text,
         "goverment": goverment.text,
-        "amount": formattedCurrency,
+        "amount": int.parse(amount.text),
         "company": selectedValue,
         "clientid": currentuser
       });
       clearController();
+      selectedValue = "";
       Get.snackbar("Success", "تم الحفظ بنجاح",
           backgroundColor: Colors.deepPurple, colorText: Colors.white);
       update();
@@ -92,5 +113,27 @@ class AddClientsController extends GetxController {
     addcompany.clear();
     amount.clear();
     update();
+  }
+
+  //=============================Search Clients=============================
+  searchClients(name) async {
+    if (name != null) {
+      try {
+        data.clear();
+        update();
+        QuerySnapshot q = await FirebaseFirestore.instance
+            .collection("users")
+            .doc(currentuser)
+            .collection("clients")
+            .get();
+
+        data.addAll(
+            q.docs.where((element) => element["name"].contains(name)).toList());
+
+        update();
+      } catch (e) {
+        print(e.toString());
+      }
+    }
   }
 }
