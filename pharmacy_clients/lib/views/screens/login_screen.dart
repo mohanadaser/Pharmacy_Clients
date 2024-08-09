@@ -10,7 +10,7 @@ import 'package:pharmacy_clients/views/screens/clients_screen.dart';
 
 import '../widgets/components.dart';
 
-import 'forgottenpasswordscreen.dart';
+import '../widgets/forgottenpasswordscreen.dart';
 import 'register_screen.dart';
 
 class LoginScreen extends StatefulWidget {

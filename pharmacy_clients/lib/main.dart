@@ -5,11 +5,14 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:pharmacy_clients/firebase_options.dart';
 import 'package:pharmacy_clients/views/screens/register_screen.dart';
 
+import 'controller/clients_controller.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  Get.put(AddClientsController());
   runApp(const MyApp());
 }
 
