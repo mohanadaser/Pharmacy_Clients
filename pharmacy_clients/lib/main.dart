@@ -5,6 +5,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hexcolor/hexcolor.dart';
 import 'package:pharmacy_clients/firebase_options.dart';
 import 'package:pharmacy_clients/views/screens/register_screen.dart';
 
@@ -29,8 +30,15 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
+
       theme: ThemeData(
         textTheme: GoogleFonts.cairoTextTheme(Theme.of(context).textTheme),
+
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: Colors.white,
+          // brightness: Brightness.light,
+        ),
+
         // This is the theme of your application.
         //
         // TRY THIS: Try running your application with "flutter run". You'll see
@@ -49,7 +57,7 @@ class MyApp extends StatelessWidget {
 
         useMaterial3: true,
       ),
-      home:  StreamBuilder(
+      home: StreamBuilder(
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
@@ -70,10 +78,8 @@ class MyApp extends StatelessWidget {
         },
       ),
       // home: RegisterScreen(),
-     // builder: EasyLoading.init(),
+      // builder: EasyLoading.init(),
       //getPages: [GetPage(name: '/home', page: () => HomeScreen())],
     );
-
-    
   }
 }

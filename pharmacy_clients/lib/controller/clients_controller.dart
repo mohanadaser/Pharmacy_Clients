@@ -59,7 +59,7 @@ class AddClientsController extends GetxController {
 
   //============اضافة الشركات==================
   void addCompanies(userid) async {
-    //final uuid = const Uuid().v4();
+    
     try {
       await FirebaseFirestore.instance
           .collection("users")
@@ -80,6 +80,7 @@ class AddClientsController extends GetxController {
 
   void addClients(userid) async {
     try {
+      //final uuid = const Uuid().v4();
       // final number = double.parse(amount.text);
       // final curency = NumberFormat.currency(locale: 'ar_EG', symbol: 'ج.م.');
       // final formattedCurrency = curency.format(number);
@@ -134,6 +135,21 @@ class AddClientsController extends GetxController {
       } catch (e) {
         print(e.toString());
       }
+    }
+  }
+  //==============================delete clients==============================
+
+  void deleteClients(id) async {
+    try {
+      await FirebaseFirestore.instance
+          .collection("users")
+          .doc(currentuser)
+          .collection("clients")
+          .doc(id)
+          .delete();
+      update();
+    } catch (e) {
+      print(e.toString());
     }
   }
 }
