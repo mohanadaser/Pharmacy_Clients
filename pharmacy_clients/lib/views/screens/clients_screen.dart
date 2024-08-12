@@ -153,15 +153,14 @@ class _ClientsScreenState extends State<ClientsScreen> {
                                           text: filteredDocuments[index]
                                               ['phone'],
                                           style: const TextStyle(
-                                              color: Colors.red,
+                                              color: Colors.deepPurple,
                                               fontWeight: FontWeight.bold))
                                     ])),
                                     trailing: Text(
                                       "${filteredDocuments[index]['amount']}",
                                       style: TextStyle(
-                                          color: int.parse(
-                                                      filteredDocuments[index]
-                                                          ['amount']) >
+                                          color: filteredDocuments[index]
+                                                      ['amount'] >
                                                   0
                                               ? Colors.green
                                               : Colors.red,

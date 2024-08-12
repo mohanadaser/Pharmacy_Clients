@@ -12,10 +12,12 @@ Widget CustomForm(
         final String? Function(String?)? onchange,
         final int? maxLines,
         final int? maxlentgh,
+        final bool readonly = false,
         required TextEditingController name,
         List<TextInputFormatter>? formating,
         Icon? sufxicon}) =>
     TextFormField(
+      readOnly: readonly,
       controller: name,
       onChanged: onchange,
       inputFormatters: formating,
@@ -25,7 +27,7 @@ Widget CustomForm(
       keyboardType: type,
       decoration: InputDecoration(
           // border: OutlineInputBorder(
-          //   borderRadius: BorderRadius.circular(20),
+          //   borderRadius: BorderRadius.circular(15),
           // ),
           suffixIcon: sufxicon,
           hintText: text,
@@ -46,7 +48,7 @@ Widget CustomPass(
       keyboardType: type,
       decoration: InputDecoration(
         // border: OutlineInputBorder(
-        //   borderRadius: BorderRadius.circular(10),
+        //   borderRadius: BorderRadius.circular(15),
         // ),
         suffixIcon: sufxicon,
         hintText: text,

@@ -37,7 +37,6 @@ class MyApp extends StatelessWidget {
         canvasColor: Colors.white,
         scaffoldBackgroundColor: HexColor('efeee5'),
         appBarTheme: AppBarTheme(backgroundColor: HexColor('efeee5')),
-      
         cardTheme: const CardTheme(color: Colors.white),
         useMaterial3: true,
       ),

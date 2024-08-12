@@ -1,11 +1,9 @@
-import 'dart:ffi';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pharmacy_clients/controller/clients_controller.dart';
 
+import '../widgets/add_invoice.dart';
 import '../widgets/components.dart';
 
 class EditClients extends StatefulWidget {
@@ -14,7 +12,7 @@ class EditClients extends StatefulWidget {
   final String phone;
   final String company;
   final String goverment;
-  final String amount;
+  final int amount;
 
   const EditClients(
       {super.key,
@@ -41,7 +39,7 @@ class _EditClientsState extends State<EditClients> {
     phone.text = widget.phone;
     company.text = widget.company;
     governorate.text = widget.goverment;
-    amount.text = widget.amount;
+    amount.text = widget.amount.toString();
     super.initState();
   }
 
@@ -70,7 +68,7 @@ class _EditClientsState extends State<EditClients> {
         governorate.text = widget.goverment;
       }
       if (amount.text == "") {
-        amount.text = widget.amount;
+        amount.text = widget.amount.toString();
       }
       await FirebaseFirestore.instance
           .collection("users")
@@ -82,7 +80,7 @@ class _EditClientsState extends State<EditClients> {
         "phone": phone.text,
         "company": company.text,
         "goverment": governorate.text,
-        "amount": amount.text
+        "amount": int.parse(amount.text)
       });
       Get.snackbar("Success", "تم التعديل بنجاح",
           backgroundColor: Colors.deepPurple, colorText: Colors.white);
@@ -169,7 +167,7 @@ class _EditClientsState extends State<EditClients> {
                         backgroundColor: Colors.black,
                         foregroundColor: Colors.white),
                     onPressed: () {
-                      Get.back();
+                      Get.dialog(AddInvoice(id: widget.id, name: widget.name));
                     },
                     child: const Text(
                       "فاتورة بيع",
