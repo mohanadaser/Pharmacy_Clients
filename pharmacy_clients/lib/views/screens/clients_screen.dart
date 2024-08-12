@@ -1,15 +1,18 @@
-// ignore_for_file: avoid_types_as_parameter_names, non_constant_identifier_names
+// ignore_for_file: avoid_types_as_parameter_names, non_constant_identifier_names, prefer_const_constructors
 
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:hexcolor/hexcolor.dart';
+
 import 'package:pharmacy_clients/views/screens/add_clients.dart';
+import 'package:pharmacy_clients/views/screens/edit_clients.dart';
 
 import '../../controller/clients_controller.dart';
+
 import '../widgets/components.dart';
+import '../widgets/navbar.dart';
 import 'login_screen.dart';
 
 class ClientsScreen extends StatefulWidget {
@@ -23,9 +26,7 @@ class _ClientsScreenState extends State<ClientsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: HexColor('efeee5'),
       appBar: AppBar(
-        backgroundColor: HexColor('efeee5'),
         title: const Text(
           "قائمة عملاء الصيدليه",
           style:
@@ -76,7 +77,7 @@ class _ClientsScreenState extends State<ClientsScreen> {
                               ConnectionState.waiting) {
                             return const Center(
                                 child: CircularProgressIndicator(
-                              backgroundColor: Colors.amber,
+                              backgroundColor: Colors.deepPurple,
                             ));
                           }
                           if (snapshot.hasData) {
@@ -92,6 +93,22 @@ class _ClientsScreenState extends State<ClientsScreen> {
                               separatorBuilder: (context, index) =>
                                   const Divider(),
                               itemBuilder: (context, index) => InkWell(
+                                //======================================edit clients=========
+                                onTap: () {
+                                  Get.to(() => EditClients(
+                                        id: filteredDocuments[index].id,
+                                        name: filteredDocuments[index]['name'],
+                                        company: filteredDocuments[index]
+                                            ['company'],
+                                        phone: filteredDocuments[index]
+                                            ['phone'],
+                                        amount: filteredDocuments[index]
+                                            ['amount'],
+                                        goverment: filteredDocuments[index]
+                                            ['goverment'],
+                                      ));
+                                },
+                                //=========================================delete clients=========
                                 onLongPress: () {
                                   AwesomeDialog(
                                     context: context,
@@ -142,8 +159,9 @@ class _ClientsScreenState extends State<ClientsScreen> {
                                     trailing: Text(
                                       "${filteredDocuments[index]['amount']}",
                                       style: TextStyle(
-                                          color: filteredDocuments[index]
-                                                      ['amount'] >
+                                          color: int.parse(
+                                                      filteredDocuments[index]
+                                                          ['amount']) >
                                                   0
                                               ? Colors.green
                                               : Colors.red,
@@ -178,6 +196,7 @@ class _ClientsScreenState extends State<ClientsScreen> {
         },
         child: const Icon(Icons.add),
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }

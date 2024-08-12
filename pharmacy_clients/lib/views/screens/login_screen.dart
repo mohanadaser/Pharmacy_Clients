@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:pharmacy_clients/views/screens/clients_screen.dart';
+import 'package:pharmacy_clients/views/widgets/navbar.dart';
 
 import '../widgets/components.dart';
 
@@ -70,7 +71,7 @@ class _LoginScreenState extends State<LoginScreen> {
             password: password,
           );
 
-          Get.offAll(() => const ClientsScreen());
+          Get.offAll(() => const NavBar());
           setState(() {});
           isloading = false;
         } else {
