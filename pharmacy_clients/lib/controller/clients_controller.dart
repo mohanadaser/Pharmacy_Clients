@@ -3,7 +3,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 
 class AddClientsController extends GetxController {
   String selectedValue = "";
@@ -59,7 +58,6 @@ class AddClientsController extends GetxController {
 
   //============اضافة الشركات==================
   void addCompanies(userid) async {
-    
     try {
       await FirebaseFirestore.instance
           .collection("users")

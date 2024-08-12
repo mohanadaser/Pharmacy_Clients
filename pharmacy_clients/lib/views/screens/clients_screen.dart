@@ -12,7 +12,7 @@ import 'package:pharmacy_clients/views/screens/edit_clients.dart';
 import '../../controller/clients_controller.dart';
 
 import '../widgets/components.dart';
-import '../widgets/navbar.dart';
+
 import 'login_screen.dart';
 
 class ClientsScreen extends StatefulWidget {

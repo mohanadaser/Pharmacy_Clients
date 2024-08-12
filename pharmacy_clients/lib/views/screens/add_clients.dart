@@ -30,102 +30,113 @@ class AddClients extends StatelessWidget {
         ),
         body: GetBuilder<AddClientsController>(
           builder: (AddClientsController controller) => SingleChildScrollView(
+              scrollDirection: Axis.vertical,
               child: Container(
-            width: Get.width,
-            margin: const EdgeInsets.all(10),
-            child: Directionality(
-              textDirection: TextDirection.rtl,
-              child: Form(
-                key: controller.formKey,
-                child: Column(children: [
-                  CustomForm(
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return "ادخل الاسم";
-                      }
-                      return null;
-                    },
-                    text: "اسم العميل",
-                    type: TextInputType.name,
-                    name: controller.name,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  color: Colors.white,
+                ),
+                //width: Get.width,
+                height: Get.height * 0.8,
+                margin: const EdgeInsets.all(20),
+                padding: const EdgeInsets.all(20),
+                child: Directionality(
+                  textDirection: TextDirection.rtl,
+                  child: Form(
+                    key: controller.formKey,
+                    child: Column(children: [
+                      CustomForm(
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return "ادخل الاسم";
+                          }
+                          return null;
+                        },
+                        text: "اسم العميل",
+                        type: TextInputType.name,
+                        name: controller.name,
+                      ),
+                      const SizedBox(height: 10.0),
+                      CustomForm(
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return "ادخل رقم الهاتف";
+                          }
+                          return null;
+                        },
+                        text: "رقم الهاتف",
+                        formating: [LengthLimitingTextInputFormatter(11)],
+                        type: TextInputType.phone,
+                        name: controller.phone,
+                      ),
+                      const SizedBox(height: 10.0),
+                      CustomForm(
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return "ادخل الجهة الحكوميه التابع لها";
+                            }
+                            return null;
+                          },
+                          text: "الجهة الحكوميه التابع لها",
+                          type: TextInputType.name,
+                          name: controller.goverment),
+                      const SizedBox(height: 10.0),
+                      CustomForm(
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return "ادخل رصيد العميل";
+                            }
+                            return null;
+                          },
+                          text: "رصيد العميل",
+                          type: TextInputType.number,
+                          name: controller.amount),
+                      const SizedBox(height: 15.0),
+                      IconButton(
+                          onPressed: () {
+                            Get.dialog(
+                                Alertdialog(addcompany: controller.addcompany));
+                          },
+                          icon: const Icon(Icons.add, size: 30)),
+                      const Text(
+                        "اضف شركه",
+                        style: TextStyle(
+                            fontSize: 18, fontWeight: FontWeight.bold),
+                      ),
+                      const SizedBox(height: 20.0),
+                      const FirebaseDropdownMenuItem(),
+                      const SizedBox(height: 20.0),
+                      StreamBuilder(
+                        stream: FirebaseFirestore.instance
+                            .collection("users")
+                            .where("uid",
+                                isEqualTo:
+                                    FirebaseAuth.instance.currentUser?.uid)
+                            .snapshots(),
+                        builder: (BuildContext context,
+                                AsyncSnapshot<QuerySnapshot> snapshot) =>
+                            ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                    backgroundColor: Colors.deepPurple,
+                                    foregroundColor: Colors.white),
+                                onPressed: () {
+                                  if (controller.formKey.currentState!
+                                      .validate()) {
+                                    controller.addClients(
+                                        snapshot.data?.docs[0]['uid']);
+                                  }
+                                },
+                                child: const Text(
+                                  "اضافة العميل",
+                                  style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold),
+                                )),
+                      )
+                    ]),
                   ),
-                  const SizedBox(height: 10.0),
-                  CustomForm(
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return "ادخل رقم الهاتف";
-                      }
-                      return null;
-                    },
-                    text: "رقم الهاتف",
-                    formating: [LengthLimitingTextInputFormatter(11)],
-                    type: TextInputType.phone,
-                    name: controller.phone,
-                  ),
-                  const SizedBox(height: 10.0),
-                  CustomForm(
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return "ادخل الجهة الحكوميه التابع لها";
-                        }
-                        return null;
-                      },
-                      text: "الجهة الحكوميه التابع لها",
-                      type: TextInputType.name,
-                      name: controller.goverment),
-                  const SizedBox(height: 10.0),
-                  CustomForm(
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return "ادخل رصيد العميل";
-                        }
-                        return null;
-                      },
-                      text: "رصيد العميل",
-                      type: TextInputType.number,
-                      name: controller.amount),
-                  const SizedBox(height: 15.0),
-                  IconButton(
-                      onPressed: () {
-                        Get.dialog(
-                            Alertdialog(addcompany: controller.addcompany));
-                      },
-                      icon: const Icon(Icons.add, size: 30)),
-                  const Text(
-                    "اضف شركه",
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                  ),
-                  const SizedBox(height: 20.0),
-                  const FirebaseDropdownMenuItem(),
-                  const SizedBox(height: 20.0),
-                  StreamBuilder(
-                    stream: FirebaseFirestore.instance
-                        .collection("users")
-                        .where("uid",
-                            isEqualTo: FirebaseAuth.instance.currentUser?.uid)
-                        .snapshots(),
-                    builder: (BuildContext context,
-                            AsyncSnapshot<QuerySnapshot> snapshot) =>
-                        ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.deepPurple,
-                                foregroundColor: Colors.white),
-                            onPressed: () {
-                              if (controller.formKey.currentState!.validate()) {
-                                controller
-                                    .addClients(snapshot.data?.docs[0]['uid']);
-                              }
-                            },
-                            child: const Text(
-                              "اضافة العميل",
-                              style: TextStyle(
-                                  fontSize: 18, fontWeight: FontWeight.bold),
-                            )),
-                  )
-                ]),
-              ),
-            ),
-          )),
+                ),
+              )),
         ));
   }
 }

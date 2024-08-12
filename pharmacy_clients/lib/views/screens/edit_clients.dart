@@ -53,23 +53,29 @@ class _EditClientsState extends State<EditClients> {
     super.dispose();
   }
 
+  //==========validate the form======================
+  void validateForm() {
+    if (name.text == "") {
+      name.text = widget.name;
+    }
+    if (phone.text == "") {
+      phone.text = widget.phone;
+    }
+    if (company.text == "") {
+      company.text = widget.company;
+    }
+    if (governorate.text == "") {
+      governorate.text = widget.goverment;
+    }
+    if (amount.text == "") {
+      amount.text = widget.amount.toString();
+    }
+  }
+
+  //==========update clients=====================
   void updateClients() async {
     try {
-      if (name.text == "") {
-        name.text = widget.name;
-      }
-      if (phone.text == "") {
-        phone.text = widget.phone;
-      }
-      if (company.text == "") {
-        company.text = widget.company;
-      }
-      if (governorate.text == "") {
-        governorate.text = widget.goverment;
-      }
-      if (amount.text == "") {
-        amount.text = widget.amount.toString();
-      }
+      validateForm();
       await FirebaseFirestore.instance
           .collection("users")
           .doc(FirebaseAuth.instance.currentUser!.uid)
@@ -104,8 +110,13 @@ class _EditClientsState extends State<EditClients> {
         textDirection: TextDirection.rtl,
         child: SingleChildScrollView(
           child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                color: Colors.white,
+              ),
               width: Get.width,
               padding: const EdgeInsets.all(20),
+              margin: const EdgeInsets.all(20),
               child: Column(children: [
                 const SizedBox(
                   height: 20,
@@ -148,6 +159,7 @@ class _EditClientsState extends State<EditClients> {
                   name: amount,
                 ),
                 const SizedBox(height: 20.0),
+                //=================================تعديل العميل==================================
                 ElevatedButton(
                     style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.deepPurple,
@@ -157,11 +169,12 @@ class _EditClientsState extends State<EditClients> {
                       Get.back();
                     },
                     child: const Text(
-                      "تعديل العميل",
+                      "تعديل بيانات العميل",
                       style:
                           TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                     )),
                 const SizedBox(height: 20.0),
+                //=================================فاتورة بيع==================================
                 ElevatedButton(
                     style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.black,
@@ -170,14 +183,15 @@ class _EditClientsState extends State<EditClients> {
                       Get.dialog(AddInvoice(id: widget.id, name: widget.name));
                     },
                     child: const Text(
-                      "فاتورة بيع",
+                      " انشاء فاتورة بيع",
                       style:
                           TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                     )),
                 const SizedBox(height: 20.0),
+                //=================================اضافة علاج يومى او شهرى==================================
                 ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.black,
+                        backgroundColor: Colors.green,
                         foregroundColor: Colors.white),
                     onPressed: () {
                       Get.back();

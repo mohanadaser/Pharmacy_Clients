@@ -20,27 +20,31 @@ class Alertdialog extends StatelessWidget {
     return GetBuilder<AddClientsController>(
       builder: (AddClientsController controller) => AlertDialog(
         actions: [
-          TextField(
-            controller: addcompany,
-            decoration: InputDecoration(
-                hintText: "اسم الشركه",
-                filled: true,
-                fillColor: Colors.white,
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12),
-                )),
+          Directionality(
+            textDirection: TextDirection.rtl,
+            child: TextField(
+              controller: addcompany,
+              decoration: InputDecoration(
+                  hintText: "اسم الشركه",
+                  filled: true,
+                  fillColor: Colors.white,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  )),
+            ),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               StreamBuilder<QuerySnapshot>(
-                  stream: FirebaseFirestore.instance
-                      .collection("users")
-                      .where("uid",
-                          isEqualTo: FirebaseAuth.instance.currentUser?.uid)
-                      .snapshots(),
-                  builder: (BuildContext context,AsyncSnapshot<QuerySnapshot> snapshot)=> 
-                     ElevatedButton(
+                stream: FirebaseFirestore.instance
+                    .collection("users")
+                    .where("uid",
+                        isEqualTo: FirebaseAuth.instance.currentUser?.uid)
+                    .snapshots(),
+                builder: (BuildContext context,
+                        AsyncSnapshot<QuerySnapshot> snapshot) =>
+                    ElevatedButton(
                         style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.deepPurple,
                             foregroundColor: Colors.white),
@@ -54,7 +58,7 @@ class Alertdialog extends StatelessWidget {
                           style: TextStyle(
                               fontSize: 12, fontWeight: FontWeight.bold),
                         )),
-                  ),
+              ),
               IconButton(
                   onPressed: () {
                     Get.back();

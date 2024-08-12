@@ -17,6 +17,7 @@ class AddInvoice extends StatefulWidget {
 }
 
 class _AddInvoiceState extends State<AddInvoice> {
+  //==============Add Invoice================ ======================================
   void addInvoice() async {
     FirebaseFirestore firestore = FirebaseFirestore.instance;
     WriteBatch batch = firestore.batch();
@@ -41,18 +42,25 @@ class _AddInvoiceState extends State<AddInvoice> {
     batch.update(updateclient,
         {"amount": FieldValue.increment(-int.parse(cureAmount.text))});
     await batch.commit().then((_) {
-      Get.snackbar("success", "تمت العملية بنجاح");
+      Get.snackbar("success", "تمت العملية بنجاح",backgroundColor: Colors.green);
     }).catchError((error) {
       Get.snackbar("Error", error.toString());
     });
   }
-
+//==================================================================================
   TextEditingController name = TextEditingController();
   TextEditingController cureAmount = TextEditingController();
   @override
   void initState() {
     name.text = widget.name;
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    name.dispose();
+    cureAmount.dispose();
+    super.dispose();
   }
 
   @override
