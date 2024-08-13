@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../widgets/add_cure.dart';
 import '../widgets/add_invoice.dart';
 import '../widgets/components.dart';
 
@@ -194,7 +195,7 @@ class _EditClientsState extends State<EditClients> {
                         backgroundColor: Colors.green,
                         foregroundColor: Colors.white),
                     onPressed: () {
-                      Get.back();
+                      Get.dialog((AddCure(id: widget.id, name: widget.name)));
                     },
                     child: const Text(
                       " اضافة علاج يومى او شهرى",
