@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:pharmacy_clients/views/widgets/components.dart';
+import 'package:pharmacy_clients/views/widgets/navbar.dart';
 
+import '../../controller/clients_controller.dart';
 import '../screens/clients_screen.dart';
 
 class AddInvoice extends StatefulWidget {
@@ -37,10 +39,11 @@ class _AddInvoiceState extends State<AddInvoice> {
     batch.set(invoices.doc(), {
       "name": name.text,
       "cureAmount": int.parse(cureAmount.text),
-      "date": DateTime.now().toString()
+      "date": DateTime.now().toString(),
+      "deviceid": Get.find<AddClientsController>().deviceid
     });
     batch.update(updateclient,
-        {"amount": FieldValue.increment(-int.parse(cureAmount.text))});
+        {"currentAmount": FieldValue.increment(-int.parse(cureAmount.text))});
     await batch.commit().then((_) {
       Get.snackbar("success", "تمت العملية بنجاح",
           backgroundColor: Colors.green, colorText: Colors.white);
@@ -108,7 +111,7 @@ class _AddInvoiceState extends State<AddInvoice> {
                     foregroundColor: Colors.white),
                 onPressed: () {
                   addInvoice();
-                  Get.to(() => const ClientsScreen());
+                  Get.to(() => const NavBar());
                 },
                 child: const Text(
                   "حفظ",

@@ -103,7 +103,7 @@ class _ClientsScreenState extends State<ClientsScreen> {
                                         phone: filteredDocuments[index]
                                             ['phone'],
                                         amount: filteredDocuments[index]
-                                            ['amount'],
+                                            ['currentAmount'],
                                         goverment: filteredDocuments[index]
                                             ['goverment'],
                                       ));
@@ -157,10 +157,10 @@ class _ClientsScreenState extends State<ClientsScreen> {
                                               fontWeight: FontWeight.bold))
                                     ])),
                                     trailing: Text(
-                                      "${filteredDocuments[index]['amount']}",
+                                      "${filteredDocuments[index]['currentAmount']}",
                                       style: TextStyle(
                                           color: filteredDocuments[index]
-                                                      ['amount'] >
+                                                      ['currentAmount'] >
                                                   0
                                               ? Colors.green
                                               : Colors.red,

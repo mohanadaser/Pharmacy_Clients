@@ -3,7 +3,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:pharmacy_clients/views/widgets/navbar.dart';
 
+import '../../controller/clients_controller.dart';
 import '../screens/clients_screen.dart';
 import 'components.dart';
 
@@ -51,10 +53,11 @@ class _AddCureState extends State<AddCure> {
     batch.set(cures.doc(), {
       "name": username.text,
       "cureBalance": int.parse(cureBalance.text),
-      "date": DateTime.now().toString()
+      "date": DateTime.now().toString(),
+      "deviceid": Get.find<AddClientsController>().deviceid
     });
     batch.update(updateAmount,
-        {"amount": FieldValue.increment(int.parse(cureBalance.text))});
+        {"currentAmount": FieldValue.increment(int.parse(cureBalance.text))});
     await batch.commit().then((_) {
       Get.snackbar("success", "تمت العملية بنجاح",
           backgroundColor: Colors.green, colorText: Colors.white);
@@ -62,6 +65,7 @@ class _AddCureState extends State<AddCure> {
       Get.snackbar("Error", error.toString());
     });
   }
+
 //====================================================================================
   @override
   Widget build(BuildContext context) {
@@ -109,7 +113,7 @@ class _AddCureState extends State<AddCure> {
                     foregroundColor: Colors.white),
                 onPressed: () {
                   addCure();
-                  Get.to(() => const ClientsScreen());
+                  Get.to(() => const NavBar());
                 },
                 child: const Text(
                   "حفظ",

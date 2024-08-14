@@ -1,8 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../controller/clients_controller.dart';
 import '../widgets/add_cure.dart';
 import '../widgets/add_invoice.dart';
 import '../widgets/components.dart';
@@ -34,6 +36,7 @@ class _EditClientsState extends State<EditClients> {
   TextEditingController company = TextEditingController();
   TextEditingController governorate = TextEditingController();
   TextEditingController amount = TextEditingController();
+  
   @override
   void initState() {
     name.text = widget.name;
@@ -87,7 +90,8 @@ class _EditClientsState extends State<EditClients> {
         "phone": phone.text,
         "company": company.text,
         "goverment": governorate.text,
-        "amount": int.parse(amount.text)
+        "currentAmount": int.parse(amount.text),
+        "device": Get.find<AddClientsController>().deviceid
       });
       Get.snackbar("Success", "تم التعديل بنجاح",
           backgroundColor: Colors.deepPurple, colorText: Colors.white);

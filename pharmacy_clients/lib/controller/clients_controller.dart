@@ -1,4 +1,8 @@
+// ignore_for_file: depend_on_referenced_packages
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:device_info_plus/device_info_plus.dart';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -15,15 +19,20 @@ class AddClientsController extends GetxController {
   TextEditingController searchname = TextEditingController();
   final formKey = GlobalKey<FormState>();
   List<QueryDocumentSnapshot> data = [];
+  DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
+  String deviceid = "";
   //List<QueryDocumentSnapshot> clientslist = [];
   bool isLoading = true;
 
   @override
-  void onInit() {
+  void onInit() async {
+    AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
+    deviceid = androidInfo.model;
     getclients();
     clearController();
     selectedValue = "";
     currentuser;
+
     super.onInit();
   }
 
@@ -90,9 +99,10 @@ class AddClientsController extends GetxController {
         "name": name.text,
         "phone": phone.text,
         "goverment": goverment.text,
-        "amount": int.parse(amount.text),
+        "currentAmount": int.parse(amount.text),
         "company": selectedValue,
-        "clientid": currentuser
+        "clientid": currentuser,
+        "device": deviceid
       });
       clearController();
       selectedValue = "";
