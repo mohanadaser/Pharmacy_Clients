@@ -125,26 +125,26 @@ class AddClientsController extends GetxController {
   }
 
   //=============================Search Clients=============================
-  searchClients(name) async {
-    if (name != null) {
-      try {
-        data.clear();
-        update();
-        QuerySnapshot q = await FirebaseFirestore.instance
-            .collection("users")
-            .doc(currentuser)
-            .collection("clients")
-            .get();
+  // searchClients(name) async {
+  //   if (name != null) {
+  //     try {
+  //       data.clear();
+  //       update();
+  //       QuerySnapshot q = await FirebaseFirestore.instance
+  //           .collection("users")
+  //           .doc(currentuser)
+  //           .collection("clients")
+  //           .get();
 
-        data.addAll(
-            q.docs.where((element) => element["name"].contains(name)).toList());
+  //       data.addAll(
+  //           q.docs.where((element) => element["name"].contains(name)).toList());
 
-        update();
-      } catch (e) {
-        print(e.toString());
-      }
-    }
-  }
+  //       update();
+  //     } catch (e) {
+  //       print(e.toString());
+  //     }
+  //   }
+  // }
   //==============================delete clients==============================
 
   void deleteClients(id) async {

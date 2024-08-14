@@ -1,11 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:device_info_plus/device_info_plus.dart';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../controller/clients_controller.dart';
-import '../widgets/add_cure.dart';
+
 import '../widgets/add_invoice.dart';
 import '../widgets/components.dart';
 
@@ -36,7 +36,7 @@ class _EditClientsState extends State<EditClients> {
   TextEditingController company = TextEditingController();
   TextEditingController governorate = TextEditingController();
   TextEditingController amount = TextEditingController();
-  
+
   @override
   void initState() {
     name.text = widget.name;
@@ -188,24 +188,12 @@ class _EditClientsState extends State<EditClients> {
                       Get.dialog(AddInvoice(id: widget.id, name: widget.name));
                     },
                     child: const Text(
-                      " انشاء فاتورة بيع",
+                      " فاتورة بيع او رصيد علاج",
                       style:
                           TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                     )),
                 const SizedBox(height: 20.0),
                 //=================================اضافة علاج يومى او شهرى==================================
-                ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.green,
-                        foregroundColor: Colors.white),
-                    onPressed: () {
-                      Get.dialog((AddCure(id: widget.id, name: widget.name)));
-                    },
-                    child: const Text(
-                      " اضافة علاج يومى او شهرى",
-                      style:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                    )),
               ])),
         ),
       ),

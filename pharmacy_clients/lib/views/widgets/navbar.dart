@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:pharmacy_clients/views/screens/clients_screen.dart';
 
+import 'client_transactions.dart';
+
 class NavBar extends StatefulWidget {
   const NavBar({super.key});
 
@@ -12,7 +14,7 @@ class _NavBarState extends State<NavBar> {
   int currentpage = 0;
   final List<Widget> pages = [
     const ClientsScreen(),
-    const PageTwo(),
+    const ClientTransactions(),
     const PageThree(),
   ];
   @override
@@ -32,7 +34,8 @@ class _NavBarState extends State<NavBar> {
         items: const [
           BottomNavigationBarItem(
               icon: Icon(Icons.home), label: 'عملاء الصيدليه'),
-          BottomNavigationBarItem(icon: Icon(Icons.receipt), label: 'التقارير'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.receipt), label: 'حركات العملاء'),
           BottomNavigationBarItem(
               icon: Icon(Icons.settings), label: 'الاعدادات'),
         ],
@@ -41,16 +44,7 @@ class _NavBarState extends State<NavBar> {
   }
 }
 
-class PageTwo extends StatelessWidget {
-  const PageTwo({super.key});
 
-  @override
-  Widget build(BuildContext context) {
-    return const Center(
-      child: Text('Page Two'),
-    );
-  }
-}
 
 class PageThree extends StatelessWidget {
   const PageThree({super.key});

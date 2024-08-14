@@ -7,7 +7,6 @@ import 'package:pharmacy_clients/views/widgets/components.dart';
 import 'package:pharmacy_clients/views/widgets/navbar.dart';
 
 import '../../controller/clients_controller.dart';
-import '../screens/clients_screen.dart';
 
 class AddInvoice extends StatefulWidget {
   final String id;
@@ -35,15 +34,27 @@ class _AddInvoiceState extends State<AddInvoice> {
         .doc(FirebaseAuth.instance.currentUser?.uid)
         .collection("clients")
         .doc(widget.id);
-
-    batch.set(invoices.doc(), {
-      "name": name.text,
-      "cureAmount": int.parse(cureAmount.text),
-      "date": DateTime.now().toString(),
-      "deviceid": Get.find<AddClientsController>().deviceid
-    });
-    batch.update(updateclient,
-        {"currentAmount": FieldValue.increment(-int.parse(cureAmount.text))});
+    if (selectedOption == "فاتورة بيع") {
+      batch.set(invoices.doc(), {
+        "name": name.text,
+        "type": "فاتورة بيع",
+        "cureAmount": int.parse(cureAmount.text),
+        "date": DateTime.now().toString(),
+        "deviceid": Get.find<AddClientsController>().deviceid
+      });
+      batch.update(updateclient,
+          {"currentAmount": FieldValue.increment(-int.parse(cureAmount.text))});
+    } else {
+      batch.set(invoices.doc(), {
+        "name": name.text,
+        "type": " علاج شهرى او يومى ",
+        "cureAmount": int.parse(cureAmount.text),
+        "date": DateTime.now().toString(),
+        "deviceid": Get.find<AddClientsController>().deviceid
+      });
+      batch.update(updateclient,
+          {"currentAmount": FieldValue.increment(int.parse(cureAmount.text))});
+    }
     await batch.commit().then((_) {
       Get.snackbar("success", "تمت العملية بنجاح",
           backgroundColor: Colors.green, colorText: Colors.white);
@@ -55,6 +66,7 @@ class _AddInvoiceState extends State<AddInvoice> {
 //==================================================================================
   TextEditingController name = TextEditingController();
   TextEditingController cureAmount = TextEditingController();
+  String selectedOption = 'فاتورة بيع';
   @override
   void initState() {
     name.text = widget.name;
@@ -77,7 +89,7 @@ class _AddInvoiceState extends State<AddInvoice> {
         actions: [
           const Center(
             child: Text(
-              "فاتورة بيع",
+              " اضافة فاتورة بيع او رصيد علاج  ",
               style: TextStyle(
                   color: Colors.deepPurple,
                   fontWeight: FontWeight.bold,
@@ -99,6 +111,32 @@ class _AddInvoiceState extends State<AddInvoice> {
           const SizedBox(
             height: 20,
           ),
+          //==========================radio button===============================
+          RadioListTile<String>(
+            title: const Text('فاتورة بيع'),
+            value: 'فاتورة بيع',
+            groupValue: selectedOption,
+            onChanged: (String? value) {
+              setState(() {
+                selectedOption = value!;
+              });
+            },
+          ),
+          RadioListTile<String>(
+            title: const Text('رصيد علاج شهرى او يومى'),
+            value: 'رصيد علاج شهرى او يومى',
+            groupValue: selectedOption,
+            onChanged: (String? value) {
+              setState(() {
+                selectedOption = value!;
+              });
+            },
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          const Divider(),
+          //=================================================================
           Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
             IconButton(
                 onPressed: () {

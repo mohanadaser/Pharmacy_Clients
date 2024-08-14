@@ -54,7 +54,9 @@ class _ClientsScreenState extends State<ClientsScreen> {
                   child: CustomForm(
                       // ignore: body_might_complete_normally_nullable
                       onchange: (Value) {
-                        controller.searchClients(Value);
+                        //controller.searchClients(Value);
+                        controller.searchname.text == Value;
+                        controller.update();
                       },
                       text: "البحث عن عملاء الصيدليه  ",
                       type: TextInputType.name,
@@ -70,7 +72,10 @@ class _ClientsScreenState extends State<ClientsScreen> {
                             .collection("users")
                             .doc(FirebaseAuth.instance.currentUser?.uid)
                             .collection("clients")
-                            .snapshots(),
+                            .orderBy("name")
+                            .startAt([controller.searchname.text]).endAt([
+                          "${controller.searchname.text}\uf8ff"
+                        ]).snapshots(),
                         builder:
                             (context, AsyncSnapshot<QuerySnapshot> snapshot) {
                           if (snapshot.connectionState ==
@@ -81,30 +86,31 @@ class _ClientsScreenState extends State<ClientsScreen> {
                             ));
                           }
                           if (snapshot.hasData) {
-                            List<DocumentSnapshot> filteredDocuments =
-                                snapshot.data!.docs.where((element) {
-                              return element['name']
-                                  .contains(controller.searchname.text);
-                            }).toList();
+                            // List<DocumentSnapshot> filteredDocuments =
+                            //     snapshot.data!.docs.where((element) {
+                            //   return element['name']
+                            //       .contains(controller.searchname.text);
+                            // }).toList();
                             return ListView.separated(
                               scrollDirection: Axis.vertical,
                               shrinkWrap: true,
-                              itemCount: filteredDocuments.length,
+                              itemCount: snapshot.data!.docs.length,
                               separatorBuilder: (context, index) =>
                                   const Divider(),
                               itemBuilder: (context, index) => InkWell(
                                 //======================================edit clients=========
                                 onTap: () {
                                   Get.to(() => EditClients(
-                                        id: filteredDocuments[index].id,
-                                        name: filteredDocuments[index]['name'],
-                                        company: filteredDocuments[index]
+                                        id: snapshot.data!.docs[index].id,
+                                        name: snapshot.data!.docs[index]
+                                            ['name'],
+                                        company: snapshot.data!.docs[index]
                                             ['company'],
-                                        phone: filteredDocuments[index]
+                                        phone: snapshot.data!.docs[index]
                                             ['phone'],
-                                        amount: filteredDocuments[index]
+                                        amount: snapshot.data!.docs[index]
                                             ['currentAmount'],
-                                        goverment: filteredDocuments[index]
+                                        goverment: snapshot.data!.docs[index]
                                             ['goverment'],
                                       ));
                                 },
@@ -121,7 +127,7 @@ class _ClientsScreenState extends State<ClientsScreen> {
                                     },
                                     btnOkOnPress: () {
                                       controller.deleteClients(
-                                          filteredDocuments[index].id);
+                                          snapshot.data!.docs[index].id);
                                     },
                                     buttonsTextStyle:
                                         const TextStyle(color: Colors.white),
@@ -138,28 +144,28 @@ class _ClientsScreenState extends State<ClientsScreen> {
                                       fit: BoxFit.cover,
                                     ),
                                     title: Text(
-                                      "${filteredDocuments[index]['name']}",
+                                      "${snapshot.data!.docs[index]['name']}",
                                     ),
                                     subtitle: RichText(
                                         text: TextSpan(children: [
                                       TextSpan(
                                           text:
-                                              "${filteredDocuments[index]['company']}- ",
+                                              "${snapshot.data!.docs[index]['company']}- ",
                                           style: const TextStyle(
                                               color: Colors.black,
                                               fontSize: 15,
                                               fontWeight: FontWeight.bold)),
                                       TextSpan(
-                                          text: filteredDocuments[index]
+                                          text: snapshot.data!.docs[index]
                                               ['phone'],
                                           style: const TextStyle(
                                               color: Colors.deepPurple,
                                               fontWeight: FontWeight.bold))
                                     ])),
                                     trailing: Text(
-                                      "${filteredDocuments[index]['currentAmount']}",
+                                      "${snapshot.data!.docs[index]['currentAmount']}",
                                       style: TextStyle(
-                                          color: filteredDocuments[index]
+                                          color: snapshot.data!.docs[index]
                                                       ['currentAmount'] >
                                                   0
                                               ? Colors.green
