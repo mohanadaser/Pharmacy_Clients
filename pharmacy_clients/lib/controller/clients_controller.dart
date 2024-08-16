@@ -106,7 +106,7 @@ class AddClientsController extends GetxController {
       });
       clearController();
       selectedValue = "";
-      Get.snackbar("Success", "تم الحفظ بنجاح",
+      Get.snackbar("Success", "تم الحفظ بنجاح",duration: const Duration(seconds: 2),
           backgroundColor: Colors.deepPurple, colorText: Colors.white);
       update();
     } catch (e) {

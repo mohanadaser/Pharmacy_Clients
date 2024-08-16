@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hexcolor/hexcolor.dart';
+
 import 'package:pharmacy_clients/views/widgets/components.dart';
 import 'package:pharmacy_clients/views/widgets/navbar.dart';
 
@@ -18,8 +19,21 @@ class AddInvoice extends StatefulWidget {
 }
 
 class _AddInvoiceState extends State<AddInvoice> {
+  ///===================Custom Format===========================
+  String customFormat(DateTime dateTime) {
+    String year = dateTime.year.toString();
+    String month = dateTime.month.toString();
+    String day = dateTime.day.toString();
+    // String hour = dateTime.hour.toString();
+    // String minute = dateTime.minute.toString();
+
+    return '$day/$month/$year';
+  }
+
   //==============Add Invoice================ ======================================
   void addInvoice() async {
+    DateTime now = DateTime.now();
+    String formattedDate = customFormat(now);
     FirebaseFirestore firestore = FirebaseFirestore.instance;
     WriteBatch batch = firestore.batch();
 
@@ -39,7 +53,8 @@ class _AddInvoiceState extends State<AddInvoice> {
         "name": name.text,
         "type": "فاتورة بيع",
         "cureAmount": int.parse(cureAmount.text),
-        "date": DateTime.now().toString(),
+        "date": formattedDate,
+        "uid": FirebaseAuth.instance.currentUser?.uid,
         "deviceid": Get.find<AddClientsController>().deviceid
       });
       batch.update(updateclient,
@@ -47,9 +62,10 @@ class _AddInvoiceState extends State<AddInvoice> {
     } else {
       batch.set(invoices.doc(), {
         "name": name.text,
-        "type": " علاج شهرى او يومى ",
+        "type": "رصيد علاج",
         "cureAmount": int.parse(cureAmount.text),
-        "date": DateTime.now().toString(),
+        "date": formattedDate,
+        "uid": FirebaseAuth.instance.currentUser?.uid,
         "deviceid": Get.find<AddClientsController>().deviceid
       });
       batch.update(updateclient,
@@ -57,7 +73,9 @@ class _AddInvoiceState extends State<AddInvoice> {
     }
     await batch.commit().then((_) {
       Get.snackbar("success", "تمت العملية بنجاح",
-          backgroundColor: Colors.green, colorText: Colors.white);
+          duration: const Duration(seconds: 1),
+          backgroundColor: Colors.green,
+          colorText: Colors.white);
     }).catchError((error) {
       Get.snackbar("Error", error.toString());
     });

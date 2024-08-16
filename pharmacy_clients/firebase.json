@@ -1,1 +1,28 @@
-{"flutter":{"platforms":{"android":{"default":{"projectId":"pharmacyclients-db839","appId":"1:918372304242:android:896056d460fd126ccb09eb","fileOutput":"android/app/google-services.json"}},"dart":{"lib/firebase_options.dart":{"projectId":"pharmacyclients-db839","configurations":{"android":"1:918372304242:android:896056d460fd126ccb09eb","ios":"1:918372304242:ios:892118797d14f1adcb09eb","web":"1:918372304242:web:4d770bbdd882b459cb09eb","windows":"1:918372304242:web:e2797190502ae0bacb09eb"}}}}}}
+{
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "pharmacyclients-db839",
+          "appId": "1:918372304242:android:896056d460fd126ccb09eb",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "pharmacyclients-db839",
+          "configurations": {
+            "android": "1:918372304242:android:896056d460fd126ccb09eb",
+            "ios": "1:918372304242:ios:892118797d14f1adcb09eb",
+            "web": "1:918372304242:web:4d770bbdd882b459cb09eb",
+            "windows": "1:918372304242:web:e2797190502ae0bacb09eb"
+          }
+        }
+      }
+    }
+  },
+  "firestore": {
+    "rules": "firestore.rules",
+    "indexes": "firestore.indexes.json"
+  }
+}

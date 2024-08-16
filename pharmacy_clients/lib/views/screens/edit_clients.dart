@@ -3,6 +3,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hexcolor/hexcolor.dart';
+import 'package:pharmacy_clients/views/widgets/client_transactions.dart';
 
 import '../../controller/clients_controller.dart';
 
@@ -194,6 +196,18 @@ class _EditClientsState extends State<EditClients> {
                     )),
                 const SizedBox(height: 20.0),
                 //=================================اضافة علاج يومى او شهرى==================================
+                ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: HexColor('eeeeee'),
+                        foregroundColor: Colors.black),
+                    onPressed: () {
+                      Get.to(() => ClientTransactions(id: widget.id));
+                    },
+                    child: const Text(
+                      "عرض حركات العميل",
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    )),
               ])),
         ),
       ),
