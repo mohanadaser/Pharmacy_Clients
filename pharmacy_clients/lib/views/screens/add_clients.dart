@@ -108,7 +108,7 @@ class AddClients extends StatelessWidget {
                       const SizedBox(height: 20.0),
                       StreamBuilder(
                         stream: FirebaseFirestore.instance
-                            .collection("users")
+                            .collection("Pharmacists")
                             .where("uid",
                                 isEqualTo:
                                     FirebaseAuth.instance.currentUser?.uid)

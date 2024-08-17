@@ -1,5 +1,7 @@
 // ignore_for_file: depend_on_referenced_packages
 
+import 'dart:math';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 
@@ -52,7 +54,7 @@ class AddClientsController extends GetxController {
     try {
       data.clear();
       QuerySnapshot q = await FirebaseFirestore.instance
-          .collection("users")
+          .collection("Pharmacists")
           .doc(currentuser)
           .collection("clients")
           .get();
@@ -69,7 +71,7 @@ class AddClientsController extends GetxController {
   void addCompanies(userid) async {
     try {
       await FirebaseFirestore.instance
-          .collection("users")
+          .collection("Pharmacists")
           .doc(userid)
           .collection("companies")
           .add({"compid": userid, "companyname": addcompany.text});
@@ -87,12 +89,14 @@ class AddClientsController extends GetxController {
 
   void addClients(userid) async {
     try {
+      var random = Random();
+      int randomInt = random.nextInt(10000);
       //final uuid = const Uuid().v4();
       // final number = double.parse(amount.text);
       // final curency = NumberFormat.currency(locale: 'ar_EG', symbol: 'ج.م.');
       // final formattedCurrency = curency.format(number);
       await FirebaseFirestore.instance
-          .collection("users")
+          .collection("Pharmacists")
           .doc(userid)
           .collection("clients")
           .add({
@@ -102,12 +106,15 @@ class AddClientsController extends GetxController {
         "currentAmount": int.parse(amount.text),
         "company": selectedValue,
         "clientid": currentuser,
+        "guid": randomInt.toString(),
         "device": deviceid
       });
       clearController();
       selectedValue = "";
-      Get.snackbar("Success", "تم الحفظ بنجاح",duration: const Duration(seconds: 2),
-          backgroundColor: Colors.deepPurple, colorText: Colors.white);
+      Get.snackbar("Success", "تم الحفظ بنجاح",
+          duration: const Duration(seconds: 2),
+          backgroundColor: Colors.deepPurple,
+          colorText: Colors.white);
       update();
     } catch (e) {
       Get.snackbar("faild", e.toString(), colorText: Colors.red);
@@ -150,7 +157,7 @@ class AddClientsController extends GetxController {
   void deleteClients(id) async {
     try {
       await FirebaseFirestore.instance
-          .collection("users")
+          .collection("Pharmacists")
           .doc(currentuser)
           .collection("clients")
           .doc(id)

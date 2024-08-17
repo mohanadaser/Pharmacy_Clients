@@ -81,7 +81,7 @@ class _RegisterState extends State<RegisterScreen> {
           //==== add user to your  firestore database=================
 
           await FirebaseFirestore.instance
-              .collection("users")
+              .collection("Pharmacists")
               .doc(cred.user!.uid)
               .set({
             'name': name,

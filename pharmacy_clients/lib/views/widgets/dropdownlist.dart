@@ -18,7 +18,7 @@ class _FirebaseDropdownMenuItemState extends State<FirebaseDropdownMenuItem> {
     AddClientsController controller = Get.put(AddClientsController());
     return StreamBuilder<QuerySnapshot>(
         stream: FirebaseFirestore.instance
-            .collection("users")
+            .collection("Pharmacists")
             .doc(FirebaseAuth.instance.currentUser?.uid)
             .collection("companies")
             .snapshots(),

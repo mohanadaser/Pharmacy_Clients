@@ -38,13 +38,13 @@ class _AddInvoiceState extends State<AddInvoice> {
     WriteBatch batch = firestore.batch();
 
     CollectionReference invoices = firestore
-        .collection("users")
+        .collection("Pharmacists")
         .doc(FirebaseAuth.instance.currentUser?.uid)
         .collection("clients")
         .doc(widget.id)
         .collection("invoices");
     DocumentReference updateclient = firestore
-        .collection("users")
+        .collection("Pharmacists")
         .doc(FirebaseAuth.instance.currentUser?.uid)
         .collection("clients")
         .doc(widget.id);

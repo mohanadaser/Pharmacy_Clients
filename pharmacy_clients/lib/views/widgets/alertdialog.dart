@@ -38,7 +38,7 @@ class Alertdialog extends StatelessWidget {
             children: [
               StreamBuilder<QuerySnapshot>(
                 stream: FirebaseFirestore.instance
-                    .collection("users")
+                    .collection("Pharmacists")
                     .where("uid",
                         isEqualTo: FirebaseAuth.instance.currentUser?.uid)
                     .snapshots(),

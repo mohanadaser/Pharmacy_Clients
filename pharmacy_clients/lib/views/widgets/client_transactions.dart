@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:hexcolor/hexcolor.dart';
 
 class ClientTransactions extends StatefulWidget {
   final String id;
@@ -14,6 +15,7 @@ class _ClientTransactionsState extends State<ClientTransactions> {
   DateTime? firstDate;
   DateTime? secDate;
   TextEditingController name = TextEditingController();
+  //=========================================firstdate calender==============================
   Future pickFirstDate() async {
     final initialDate = DateTime.now();
     final newDate = await showDatePicker(
@@ -28,6 +30,7 @@ class _ClientTransactionsState extends State<ClientTransactions> {
     setState(() => firstDate = newDate);
   }
 
+//===========================================second date calender==========================
   Future pickSecDate() async {
     final initialDate = DateTime.now();
     final newDate = await showDatePicker(
@@ -42,6 +45,7 @@ class _ClientTransactionsState extends State<ClientTransactions> {
     setState(() => secDate = newDate);
   }
 
+//=================================================================
   @override
   void initState() {
     super.initState();
@@ -59,15 +63,20 @@ class _ClientTransactionsState extends State<ClientTransactions> {
                 padding: const EdgeInsets.all(15),
                 margin: const EdgeInsets.all(15),
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  color: Colors.white,
-                ),
+                    borderRadius: BorderRadius.circular(20),
+                    gradient: LinearGradient(colors: [
+                      HexColor("00B2E7"),
+                      HexColor("E064F7"),
+                      HexColor("FF8D6C")
+                    ])),
                 child: Column(
                   children: [
                     const Text(
                       "البحث عن حركات العملاء",
-                      style:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                      style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white),
                     ),
                     // Padding(
                     //   padding: const EdgeInsets.all(8.0),
@@ -99,9 +108,15 @@ class _ClientTransactionsState extends State<ClientTransactions> {
                                   icon: const Icon(
                                     Icons.calendar_today,
                                     size: 30,
+                                    color: Colors.white,
                                   ),
                                 ),
-                                const Text(" From ")
+                                const Text(
+                                  " من تاريخ ",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold),
+                                )
                               ],
                             ),
                             Text(firstDate == null
@@ -113,12 +128,16 @@ class _ClientTransactionsState extends State<ClientTransactions> {
                           children: [
                             Row(
                               children: [
-                                const Text("To "),
+                                const Text("الى تاريخ ",
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold)),
                                 IconButton(
                                   onPressed: pickSecDate,
                                   icon: const Icon(
                                     Icons.calendar_today,
                                     size: 30,
+                                    color: Colors.white,
                                   ),
                                 ),
                               ],
@@ -141,7 +160,7 @@ class _ClientTransactionsState extends State<ClientTransactions> {
                       child: StreamBuilder<QuerySnapshot>(
                           stream: firstDate != null && secDate != null
                               ? FirebaseFirestore.instance
-                                  .collection("users")
+                                  .collection("Pharmacists")
                                   .doc(FirebaseAuth.instance.currentUser!.uid)
                                   .collection("clients")
                                   .doc(widget.id)
@@ -157,7 +176,7 @@ class _ClientTransactionsState extends State<ClientTransactions> {
 
                                   .snapshots()
                               : FirebaseFirestore.instance
-                                  .collection("users")
+                                  .collection("Pharmacists")
                                   .doc(FirebaseAuth.instance.currentUser!.uid)
                                   .collection("clients")
                                   .doc(widget.id)

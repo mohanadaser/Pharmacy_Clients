@@ -5,6 +5,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hexcolor/hexcolor.dart';
 
 import 'package:pharmacy_clients/views/screens/add_clients.dart';
 import 'package:pharmacy_clients/views/screens/edit_clients.dart';
@@ -69,7 +70,7 @@ class _ClientsScreenState extends State<ClientsScreen> {
                 Expanded(
                     child: StreamBuilder<QuerySnapshot>(
                         stream: FirebaseFirestore.instance
-                            .collection("users")
+                            .collection("Pharmacists")
                             .doc(FirebaseAuth.instance.currentUser?.uid)
                             .collection("clients")
                             .orderBy("name")
@@ -134,44 +135,54 @@ class _ClientsScreenState extends State<ClientsScreen> {
                                     showCloseIcon: true,
                                   ).show();
                                 },
-                                child: Card(
-                                  elevation: 5,
-                                  child: ListTile(
-                                    leading: Image.network(
-                                      "https://cdn-icons-png.flaticon.com/512/149/149071.png",
-                                      width: 40,
-                                      height: 50,
-                                      fit: BoxFit.cover,
-                                    ),
-                                    title: Text(
-                                      "${snapshot.data!.docs[index]['name']}",
-                                    ),
-                                    subtitle: RichText(
-                                        text: TextSpan(children: [
-                                      TextSpan(
-                                          text:
-                                              "${snapshot.data!.docs[index]['company']}- ",
-                                          style: const TextStyle(
-                                              color: Colors.black,
-                                              fontSize: 15,
-                                              fontWeight: FontWeight.bold)),
-                                      TextSpan(
-                                          text: snapshot.data!.docs[index]
-                                              ['phone'],
-                                          style: const TextStyle(
-                                              color: Colors.deepPurple,
-                                              fontWeight: FontWeight.bold))
-                                    ])),
-                                    trailing: Text(
-                                      "${snapshot.data!.docs[index]['currentAmount']}",
-                                      style: TextStyle(
-                                          color: snapshot.data!.docs[index]
-                                                      ['currentAmount'] >
-                                                  0
-                                              ? Colors.green
-                                              : Colors.red,
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 18),
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    gradient: LinearGradient(colors: [
+                                      HexColor("00B2E7"),
+                                      HexColor("E064F7"),
+                                      HexColor("FF8D6C")
+                                    ]),
+                                    borderRadius: BorderRadius.circular(13.0),
+                                  ),
+                                  child: Card(
+                                    elevation: 5,
+                                    child: ListTile(
+                                      leading: Image.network(
+                                        "https://cdn-icons-png.flaticon.com/512/149/149071.png",
+                                        width: 40,
+                                        height: 50,
+                                        fit: BoxFit.cover,
+                                      ),
+                                      title: Text(
+                                        "${snapshot.data!.docs[index]['name']}",
+                                      ),
+                                      subtitle: RichText(
+                                          text: TextSpan(children: [
+                                        TextSpan(
+                                            text:
+                                                "${snapshot.data!.docs[index]['company']}- ",
+                                            style: const TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.bold)),
+                                        TextSpan(
+                                            text: snapshot.data!.docs[index]
+                                                ['phone'],
+                                            style: const TextStyle(
+                                                color: Colors.deepPurple,
+                                                fontWeight: FontWeight.bold))
+                                      ])),
+                                      trailing: Text(
+                                        "${snapshot.data!.docs[index]['currentAmount']}",
+                                        style: TextStyle(
+                                            color: snapshot.data!.docs[index]
+                                                        ['currentAmount'] >
+                                                    0
+                                                ? Colors.green
+                                                : Colors.red,
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 18),
+                                      ),
                                     ),
                                   ),
                                 ),

@@ -83,7 +83,7 @@ class _EditClientsState extends State<EditClients> {
     try {
       validateForm();
       await FirebaseFirestore.instance
-          .collection("users")
+          .collection("Pharmacists")
           .doc(FirebaseAuth.instance.currentUser!.uid)
           .collection("clients")
           .doc(widget.id)
