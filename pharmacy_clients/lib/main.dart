@@ -11,7 +11,7 @@ import 'package:pharmacy_clients/views/screens/register_screen.dart';
 import 'package:pharmacy_clients/views/widgets/navbar.dart';
 
 import 'controller/clients_controller.dart';
-import 'views/screens/clients_screen.dart';
+
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

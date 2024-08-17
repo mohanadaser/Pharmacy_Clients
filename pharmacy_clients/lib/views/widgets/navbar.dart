@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pharmacy_clients/views/screens/clients_screen.dart';
-import 'package:pharmacy_clients/views/screens/code_clients.dart';
+import 'package:pharmacy_clients/views/screens/debit_clients.dart';
 
 class NavBar extends StatefulWidget {
   const NavBar({super.key});
@@ -13,7 +13,7 @@ class _NavBarState extends State<NavBar> {
   int currentpage = 0;
   final List<Widget> pages = [
     const ClientsScreen(),
-    const CodesClients(),
+    const DebitClients(),
     const PageThree(),
   ];
   @override
@@ -34,7 +34,7 @@ class _NavBarState extends State<NavBar> {
           BottomNavigationBarItem(
               icon: Icon(Icons.home), label: 'عملاء الصيدليه'),
           BottomNavigationBarItem(
-              icon: Icon(Icons.key_outlined), label: 'اكواد العملاء'),
+              icon: Icon(Icons.money), label: 'مديونية العملاء'),
           BottomNavigationBarItem(
               icon: Icon(Icons.support_agent_rounded),
               label: 'للشكاوى والدعم الفنى'),

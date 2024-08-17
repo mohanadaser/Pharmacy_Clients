@@ -166,11 +166,18 @@ class _ClientsScreenState extends State<ClientsScreen> {
                                                 fontSize: 15,
                                                 fontWeight: FontWeight.bold)),
                                         TextSpan(
+                                            text:
+                                                "${snapshot.data!.docs[index]['guid']} - ",
+                                            style: const TextStyle(
+                                                color: Colors.red,
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.bold)),
+                                        TextSpan(
                                             text: snapshot.data!.docs[index]
                                                 ['phone'],
                                             style: const TextStyle(
                                                 color: Colors.deepPurple,
-                                                fontWeight: FontWeight.bold))
+                                                fontWeight: FontWeight.bold)),
                                       ])),
                                       trailing: Text(
                                         "${snapshot.data!.docs[index]['currentAmount']}",
