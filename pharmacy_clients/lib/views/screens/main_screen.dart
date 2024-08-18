@@ -1,0 +1,58 @@
+import 'dart:math';
+
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:pharmacy_clients/views/screens/clients_code.dart';
+import 'package:pharmacy_clients/views/screens/register_screen.dart';
+
+class MainScreen extends StatelessWidget {
+  const MainScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: Colors.cyanAccent,
+        body: SingleChildScrollView(
+          scrollDirection: Axis.vertical,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.black,
+                        foregroundColor: Colors.white,
+                      ),
+                      onPressed: () {
+                        Get.to(() => const ClientsCode());
+                      },
+                      child: const Text('انا عميل',
+                          style: TextStyle(
+                              fontSize: 18, fontWeight: FontWeight.bold))),
+                  ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.black,
+                        foregroundColor: Colors.white,
+                      ),
+                      onPressed: () {
+                        Get.to(() => const RegisterScreen());
+                      },
+                      child: const Text('انا صيدلى',
+                          style: TextStyle(
+                              fontSize: 18, fontWeight: FontWeight.bold)))
+                ],
+              ),
+              Center(
+                  child: Image.asset(
+                'assets/images/pharmacy.png',
+              )),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
