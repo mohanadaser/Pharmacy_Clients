@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hexcolor/hexcolor.dart';
@@ -48,38 +50,64 @@ class ClientsCode extends StatelessWidget {
                             controller.update();
                           },
                           text: "كود العميل  ",
-                          type: TextInputType.name,
+                          type: TextInputType.number,
                           name: controller.searchname,
                           sufxicon: const Icon(Icons.search)),
                     ),
                   ),
                   Expanded(
-                      child: ListView.builder(
-                          itemCount: 20,
-                          itemBuilder: (context, index) {
-                            return Container(
-                              margin: const EdgeInsets.all(8.0),
-                              decoration: BoxDecoration(
-                                  gradient: LinearGradient(colors: [
-                                    HexColor("00B2E7"),
-                                    HexColor("E064F7"),
-                                    HexColor("FF8D6C")
-                                  ]),
-                                  borderRadius: BorderRadius.circular(13.0)),
-                              child: const Card(
-                                child: ListTile(
-                                    title: Text('عميل رقم'),
-                                    trailing: Text("300",
-                                        style: TextStyle(
-                                            // color: snapshot.data!.docs[index]
-                                            //             ['currentAmount'] >
-                                            //         0
-                                            //     ? Colors.green
-                                            //     : Colors.red,
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 18))),
-                              ),
-                            );
+                      child: StreamBuilder<QuerySnapshot>(
+                          stream: FirebaseFirestore.instance
+                              .collection("Pharmacists")
+                              .doc(FirebaseAuth.instance.currentUser?.uid)
+                              .collection("clients")
+                              .where("guid",
+                                  isEqualTo: controller.searchcode.text)
+                              .snapshots(),
+                          builder: (context, snapshot) {
+                            if (snapshot.hasData) {
+                              return ListView.builder(
+                                  itemCount: snapshot.data!.docs.length,
+                                  itemBuilder: (context, index) {
+                                    return Container(
+                                      margin: const EdgeInsets.all(8.0),
+                                      decoration: BoxDecoration(
+                                          gradient: LinearGradient(colors: [
+                                            HexColor("00B2E7"),
+                                            HexColor("E064F7"),
+                                            HexColor("FF8D6C")
+                                          ]),
+                                          borderRadius:
+                                              BorderRadius.circular(13.0)),
+                                      child: Card(
+                                        child: ListTile(
+                                            title: Text(snapshot
+                                                .data!.docs[index]['name']),
+                                            trailing: Text(
+                                                "${snapshot.data!.docs[index]['currentAmount']}",
+                                                style: TextStyle(
+                                                    color: snapshot.data!
+                                                                    .docs[index]
+                                                                [
+                                                                'currentAmount'] >
+                                                            0
+                                                        ? Colors.green
+                                                        : Colors.red,
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 18))),
+                                      ),
+                                    );
+                                  });
+                            } else {
+                              return const Center(
+                                child: Text(
+                                  "لاتوجد بيانات",
+                                  style: TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              );
+                            }
                           }))
                 ],
               ),

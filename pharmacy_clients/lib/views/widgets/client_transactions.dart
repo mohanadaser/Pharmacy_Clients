@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:hexcolor/hexcolor.dart';
 
 class ClientTransactions extends StatefulWidget {
@@ -54,6 +55,11 @@ class _ClientTransactionsState extends State<ClientTransactions> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
+        child: AnnotatedRegion(
+      value: const SystemUiOverlayStyle(
+        statusBarColor: Colors.black,
+        statusBarIconBrightness: Brightness.light,
+      ),
       child: Scaffold(
           body: Directionality(
         textDirection: TextDirection.rtl,
@@ -265,6 +271,6 @@ class _ClientTransactionsState extends State<ClientTransactions> {
               ],
             )),
       )),
-    );
+    ));
   }
 }

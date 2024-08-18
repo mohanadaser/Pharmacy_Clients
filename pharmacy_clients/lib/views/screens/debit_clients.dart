@@ -161,7 +161,7 @@ class _ClientsScreenState extends State<DebitClients> {
                             // ignore: unnecessary_brace_in_string_interps
                             "اجمالى المديونيه: $totamasrofat",
                             style: const TextStyle(
-                                fontSize: 18,
+                                fontSize: 22,
                                 fontWeight: FontWeight.bold,
                                 color: Colors.black));
                       }),

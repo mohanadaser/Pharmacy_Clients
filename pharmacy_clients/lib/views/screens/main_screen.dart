@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:pharmacy_clients/views/screens/clients_code.dart';
 import 'package:pharmacy_clients/views/screens/register_screen.dart';
@@ -11,6 +12,11 @@ class MainScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
+        child: AnnotatedRegion(
+      value: const SystemUiOverlayStyle(
+        statusBarColor: Colors.black,
+        statusBarIconBrightness: Brightness.light,
+      ),
       child: Scaffold(
         backgroundColor: Colors.cyanAccent,
         body: SingleChildScrollView(
@@ -53,6 +59,6 @@ class MainScreen extends StatelessWidget {
           ),
         ),
       ),
-    );
+    ));
   }
 }

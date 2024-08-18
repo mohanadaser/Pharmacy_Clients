@@ -16,14 +16,9 @@ import '../widgets/components.dart';
 
 import 'login_screen.dart';
 
-class ClientsScreen extends StatefulWidget {
+class ClientsScreen extends StatelessWidget {
   const ClientsScreen({super.key});
 
-  @override
-  State<ClientsScreen> createState() => _ClientsScreenState();
-}
-
-class _ClientsScreenState extends State<ClientsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
