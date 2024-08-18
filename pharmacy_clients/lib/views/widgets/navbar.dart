@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pharmacy_clients/views/screens/clients_screen.dart';
 import 'package:pharmacy_clients/views/screens/debit_clients.dart';
+import 'package:pharmacy_clients/views/screens/support_screen.dart';
 
 class NavBar extends StatefulWidget {
   const NavBar({super.key});
@@ -14,7 +15,7 @@ class _NavBarState extends State<NavBar> {
   final List<Widget> pages = [
     const ClientsScreen(),
     const DebitClients(),
-    const PageThree(),
+    const SupportScreen(),
   ];
   @override
   Widget build(BuildContext context) {
@@ -40,17 +41,6 @@ class _NavBarState extends State<NavBar> {
               label: 'للشكاوى والدعم الفنى'),
         ],
       ),
-    );
-  }
-}
-
-class PageThree extends StatelessWidget {
-  const PageThree({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Center(
-      child: Text('Page Three'),
     );
   }
 }
