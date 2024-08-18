@@ -19,6 +19,7 @@ class AddClientsController extends GetxController {
   TextEditingController addcompany = TextEditingController();
   TextEditingController amount = TextEditingController();
   TextEditingController searchname = TextEditingController();
+  TextEditingController searchcode = TextEditingController();
   final formKey = GlobalKey<FormState>();
   List<QueryDocumentSnapshot> data = [];
   DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
