@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:pharmacy_clients/views/screens/clients_screen.dart';
 import 'package:pharmacy_clients/views/screens/debit_clients.dart';
-import 'package:pharmacy_clients/views/screens/support_screen.dart';
+
+import '../screens/support_screen.dart';
 
 class NavBar extends StatefulWidget {
   const NavBar({super.key});

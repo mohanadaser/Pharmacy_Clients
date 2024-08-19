@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:pharmacy_clients/firebase_options.dart';
+import 'package:pharmacy_clients/views/screens/login_screen.dart';
 import 'package:pharmacy_clients/views/screens/main_screen.dart';
 import 'package:pharmacy_clients/views/screens/register_screen.dart';
 import 'package:pharmacy_clients/views/widgets/navbar.dart';
@@ -51,7 +52,7 @@ class MyApp extends StatelessWidget {
           }
           // ignore: unnecessary_null_comparison
           if (snapshot.data == null) {
-            return const RegisterScreen();
+            return const LoginScreen();
           }
           if (snapshot.hasData) {
             log(snapshot.data.toString());
