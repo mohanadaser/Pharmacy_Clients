@@ -124,9 +124,12 @@ class _ClientTransactionsState extends State<ClientTransactions> {
                             )
                           ],
                         ),
-                        Text(firstDate == null
-                            ? ""
-                            : "${firstDate?.day}/${firstDate?.month}/${firstDate?.year}"),
+                        Text(
+                          firstDate == null
+                              ? ""
+                              : "${firstDate?.day}/${firstDate?.month}/${firstDate?.year}",
+                          style: const TextStyle(color: Colors.white),
+                        ),
                       ],
                     ),
                     Column(
@@ -135,8 +138,9 @@ class _ClientTransactionsState extends State<ClientTransactions> {
                           children: [
                             const Text("الى تاريخ ",
                                 style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold)),
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                )),
                             IconButton(
                               onPressed: pickSecDate,
                               icon: const Icon(
@@ -147,9 +151,11 @@ class _ClientTransactionsState extends State<ClientTransactions> {
                             ),
                           ],
                         ),
-                        Text(secDate == null
-                            ? " "
-                            : "${secDate?.day}/${secDate?.month}/${secDate?.year}"),
+                        Text(
+                            secDate == null
+                                ? " "
+                                : "${secDate?.day}/${secDate?.month}/${secDate?.year}",
+                            style: const TextStyle(color: Colors.white)),
                       ],
                     ),
                   ],

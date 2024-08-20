@@ -1,10 +1,9 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:pharmacy_clients/controller/network/independency_injection.dart';
 import 'package:pharmacy_clients/views/screens/clients_code.dart';
+import 'package:pharmacy_clients/views/screens/login_screen.dart';
 import 'package:pharmacy_clients/views/screens/register_screen.dart';
 
 class MainScreen extends StatelessWidget {
@@ -12,7 +11,7 @@ class MainScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-      DependencyInjection.init();
+    DependencyInjection.init();
     return SafeArea(
         child: AnnotatedRegion(
       value: const SystemUiOverlayStyle(
@@ -49,7 +48,7 @@ class MainScreen extends StatelessWidget {
                         foregroundColor: Colors.white,
                       ),
                       onPressed: () {
-                        Get.to(() => const RegisterScreen());
+                        Get.to(() => const LoginScreen());
                       },
                       child: const Text('انا صيدلى',
                           style: TextStyle(

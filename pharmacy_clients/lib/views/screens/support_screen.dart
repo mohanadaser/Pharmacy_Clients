@@ -49,15 +49,16 @@ class SupportScreen extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                ElevatedButton(
-                    onPressed: () {
-                      launchUrlString('https://wa.me/+201556997194');
-                    },
-                    child: Image.asset(
-                      "assets/images/watsapp.png",
-                      width: 50,
-                      height: 50,
-                    )),
+                InkWell(
+                  onTap: () {
+                    launchUrlString('https://wa.me/+201556997194');
+                  },
+                  child: Image.asset(
+                    "assets/images/watsapp.png",
+                    width: 50,
+                    color: Colors.green,
+                  ),
+                ),
                 const SizedBox(
                   width: 10,
                 ),

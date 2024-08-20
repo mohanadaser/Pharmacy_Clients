@@ -18,6 +18,11 @@ class AddClients extends StatelessWidget {
     return Scaffold(
         backgroundColor: HexColor('efeee5'),
         appBar: AppBar(
+          leading: IconButton(
+              onPressed: () {
+                Get.back();
+              },
+              icon: const Icon(Icons.arrow_back_ios)),
           backgroundColor: HexColor('efeee5'),
           title: const Text(
             "اضافة عميل جديد",

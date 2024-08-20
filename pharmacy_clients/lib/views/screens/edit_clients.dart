@@ -106,6 +106,11 @@ class _EditClientsState extends State<EditClients> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+            onPressed: () {
+              Get.back();
+            },
+            icon: const Icon(Icons.arrow_back_ios)),
         title: const Text("تفاصيل العميل",
             style: TextStyle(
                 fontSize: 30,
