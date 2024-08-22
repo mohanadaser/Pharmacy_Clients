@@ -119,7 +119,7 @@ class _RegisterState extends State<RegisterScreen> {
         child: AnnotatedRegion(
       value: const SystemUiOverlayStyle(
         statusBarColor: Colors.black,
-        statusBarIconBrightness: Brightness.dark,
+        statusBarIconBrightness: Brightness.light,
       ),
       child: Scaffold(
         body: SingleChildScrollView(
