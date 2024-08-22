@@ -9,7 +9,6 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:pharmacy_clients/firebase_options.dart';
 import 'package:pharmacy_clients/views/screens/login_screen.dart';
 import 'package:pharmacy_clients/views/screens/main_screen.dart';
-import 'package:pharmacy_clients/views/screens/register_screen.dart';
 import 'package:pharmacy_clients/views/widgets/navbar.dart';
 
 import 'controller/clients_controller.dart';
@@ -41,6 +40,7 @@ class MyApp extends StatelessWidget {
         cardTheme: const CardTheme(color: Colors.white),
         useMaterial3: true,
       ),
+
       home: StreamBuilder(
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: (context, snapshot) {
@@ -52,11 +52,11 @@ class MyApp extends StatelessWidget {
           }
           // ignore: unnecessary_null_comparison
           if (snapshot.data == null) {
-            return const LoginScreen();
+            return const MainScreen();
           }
           if (snapshot.hasData) {
             log(snapshot.data.toString());
-            return const MainScreen();
+            return const NavBar();
           }
           return const Text("");
         },

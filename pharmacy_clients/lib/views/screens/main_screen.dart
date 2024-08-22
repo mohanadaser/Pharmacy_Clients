@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:pharmacy_clients/controller/network/independency_injection.dart';
 import 'package:pharmacy_clients/views/screens/clients_code.dart';
 import 'package:pharmacy_clients/views/screens/login_screen.dart';
-import 'package:pharmacy_clients/views/screens/register_screen.dart';
 
 class MainScreen extends StatelessWidget {
   const MainScreen({super.key});

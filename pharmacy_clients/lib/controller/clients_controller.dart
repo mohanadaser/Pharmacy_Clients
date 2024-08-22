@@ -47,6 +47,7 @@ class AddClientsController extends GetxController {
     addcompany.dispose();
     amount.dispose();
     searchname.dispose();
+    searchcode.dispose();
     super.dispose();
   }
 

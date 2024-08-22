@@ -58,9 +58,9 @@ class ClientsCode extends StatelessWidget {
                   Expanded(
                       child: StreamBuilder<QuerySnapshot>(
                           stream: FirebaseFirestore.instance
-                              .collection("Pharmacists")
-                              .doc(FirebaseAuth.instance.currentUser?.uid)
-                              .collection("clients")
+                              // .collection("Pharmacists")
+                              // .doc(FirebaseAuth.instance.currentUser?.uid)
+                              .collectionGroup("clients")
                               .where("guid",
                                   isEqualTo: controller.searchcode.text)
                               .snapshots(),

@@ -121,130 +121,127 @@ class _RegisterState extends State<RegisterScreen> {
         statusBarColor: Colors.black,
         statusBarIconBrightness: Brightness.light,
       ),
-      child: Directionality(
-        textDirection: TextDirection.rtl,
-        child: Scaffold(
-          body: SingleChildScrollView(
-            child: Stack(children: [
-              Container(
-                width: Get.width,
-                height: Get.height * .5,
-                padding: EdgeInsets.only(top: Get.height * .15, left: 15),
-                decoration: BoxDecoration(
-                    gradient: LinearGradient(colors: [
-                  HexColor("666666"),
-                  HexColor("333333"),
-                  HexColor("101010")
-                ])),
-                //child: Lottie.asset("assets/animations/login.json.json"),
-                child: const Text(
-                  "👋مرحبا بك",
-                  style: TextStyle(
-                      fontSize: 32,
-                      fontWeight: FontWeight.w700,
-                      color: Colors.white),
-                ),
+      child: Scaffold(
+        body: SingleChildScrollView(
+          child: Stack(children: [
+            Container(
+              width: Get.width,
+              height: Get.height * .5,
+              padding: EdgeInsets.only(top: Get.height * .15, left: 15),
+              decoration: BoxDecoration(
+                  gradient: LinearGradient(colors: [
+                HexColor("666666"),
+                HexColor("333333"),
+                HexColor("101010")
+              ])),
+              //child: Lottie.asset("assets/animations/login.json.json"),
+              child: const Text(
+                "👋مرحبا بك",
+                style: TextStyle(
+                    fontSize: 32,
+                    fontWeight: FontWeight.w700,
+                    color: Colors.white),
               ),
-              Container(
-                padding: const EdgeInsets.all(15),
-                margin: EdgeInsets.only(top: Get.height * .3),
-                height: Get.height,
-                width: Get.width,
-                decoration: BoxDecoration(
-                    color: HexColor("f5f5f5"),
-                    borderRadius: const BorderRadius.only(
-                        topLeft: Radius.circular(40),
-                        topRight: Radius.circular(40))),
-                child: Column(children: [
-                  const SizedBox(
-                    height: 30.0,
-                  ),
-                  CustomForm(
-                    text: "ادخل اسمك",
-                    type: TextInputType.name,
-                    name: username,
-                    sufxicon: const Icon(Icons.person),
-                  ),
-                  const SizedBox(
-                    height: 30.0,
-                  ),
-                  CustomForm(
-                    text: "ادخل ايميلك",
-                    type: TextInputType.emailAddress,
-                    name: emailaddress,
-                    sufxicon: const Icon(Icons.email),
-                  ),
-                  const SizedBox(
-                    height: 30.0,
-                  ),
-                  CustomPass(
-                      text: "ادخل كلمة المرور",
-                      type: TextInputType.visiblePassword,
-                      issecure: issecure,
-                      name: password,
-                      sufxicon: InkWell(
-                        onTap: () {
-                          issecure = !issecure;
-                          setState(() {});
-                        },
-                        child: Icon(
-                            issecure ? Icons.visibility_off : Icons.visibility),
-                      )),
-                  const SizedBox(
-                    height: 30.0,
-                  ),
-                  GestureDetector(
+            ),
+            Container(
+              padding: const EdgeInsets.all(15),
+              margin: EdgeInsets.only(top: Get.height * .3),
+              height: Get.height,
+              width: Get.width,
+              decoration: BoxDecoration(
+                  color: HexColor("f5f5f5"),
+                  borderRadius: const BorderRadius.only(
+                      topLeft: Radius.circular(40),
+                      topRight: Radius.circular(40))),
+              child: Column(children: [
+                const SizedBox(
+                  height: 30.0,
+                ),
+                CustomForm(
+                  text: "ادخل اسمك",
+                  type: TextInputType.name,
+                  name: username,
+                  sufxicon: const Icon(Icons.person),
+                ),
+                const SizedBox(
+                  height: 30.0,
+                ),
+                CustomForm(
+                  text: "ادخل ايميلك",
+                  type: TextInputType.emailAddress,
+                  name: emailaddress,
+                  sufxicon: const Icon(Icons.email),
+                ),
+                const SizedBox(
+                  height: 30.0,
+                ),
+                CustomPass(
+                    text: "ادخل كلمة المرور",
+                    type: TextInputType.visiblePassword,
+                    issecure: issecure,
+                    name: password,
+                    sufxicon: InkWell(
                       onTap: () {
-                        signupUser(
-                            email: emailaddress.text,
-                            password: password.text,
-                            name: username.text);
+                        issecure = !issecure;
+                        setState(() {});
                       },
-                      child: Container(
-                          padding: const EdgeInsets.symmetric(vertical: 15.0),
-                          width: double.infinity,
-                          decoration: BoxDecoration(
-                              gradient: LinearGradient(colors: [
-                                HexColor("666666"),
-                                HexColor("333333"),
-                                HexColor("101010")
-                              ]),
-                              borderRadius: BorderRadius.circular(30)),
-                          child: Center(
-                              child: isloading
-                                  ? const Center(
-                                      child: CircularProgressIndicator())
-                                  : const Center(
-                                      child: Text(
-                                      "تسجيل الدخول",
-                                      style: TextStyle(
-                                          fontSize: 25,
-                                          fontWeight: FontWeight.w700,
-                                          color: Colors.white),
-                                    ))))),
-                  const SizedBox(
-                    height: 30.0,
-                  ),
-                  Row(
-                    children: [
-                      const Center(
-                          child: Text(
-                        "لديك حساب بالفعل؟",
-                        style: TextStyle(
-                            color: Colors.black, fontWeight: FontWeight.bold),
-                      )),
-                      TextButton(
-                          onPressed: () {
-                            Get.to(() => const LoginScreen());
-                          },
-                          child: const Text("تسجيل الدخول",
-                              style: TextStyle(fontWeight: FontWeight.bold)))
-                    ],
-                  ),
-                ]),
-              )
-            ]),
-          ),
+                      child: Icon(
+                          issecure ? Icons.visibility_off : Icons.visibility),
+                    )),
+                const SizedBox(
+                  height: 30.0,
+                ),
+                GestureDetector(
+                    onTap: () {
+                      signupUser(
+                          email: emailaddress.text,
+                          password: password.text,
+                          name: username.text);
+                    },
+                    child: Container(
+                        padding: const EdgeInsets.symmetric(vertical: 15.0),
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                            gradient: LinearGradient(colors: [
+                              HexColor("666666"),
+                              HexColor("333333"),
+                              HexColor("101010")
+                            ]),
+                            borderRadius: BorderRadius.circular(30)),
+                        child: Center(
+                            child: isloading
+                                ? const Center(
+                                    child: CircularProgressIndicator())
+                                : const Center(
+                                    child: Text(
+                                    "تسجيل الدخول",
+                                    style: TextStyle(
+                                        fontSize: 25,
+                                        fontWeight: FontWeight.w700,
+                                        color: Colors.white),
+                                  ))))),
+                const SizedBox(
+                  height: 30.0,
+                ),
+                Row(
+                  children: [
+                    const Center(
+                        child: Text(
+                      "لديك حساب بالفعل؟",
+                      style: TextStyle(
+                          color: Colors.black, fontWeight: FontWeight.bold),
+                    )),
+                    TextButton(
+                        onPressed: () {
+                          Get.to(() => const LoginScreen());
+                        },
+                        child: const Text("تسجيل الدخول",
+                            style: TextStyle(fontWeight: FontWeight.bold)))
+                  ],
+                ),
+              ]),
+            )
+          ]),
         ),
       ),
     ));

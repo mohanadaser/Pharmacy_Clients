@@ -13,6 +13,7 @@ import 'package:pharmacy_clients/views/widgets/navbar.dart';
 import '../widgets/components.dart';
 
 import '../widgets/forgottenpasswordscreen.dart';
+import 'main_screen.dart';
 import 'register_screen.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -242,6 +243,19 @@ class _LoginScreenState extends State<LoginScreen> {
                                       TextStyle(fontWeight: FontWeight.bold)))
                         ],
                       ),
+                      const SizedBox(
+                        height: 20.0,
+                      ),
+                      TextButton(
+                          onPressed: () {
+                            Get.off(() => const MainScreen());
+                          },
+                          child: const Text(
+                            "الرجوع الى الصفحة الرئيسيه",
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black),
+                          ))
                     ])),
               )
             ]),
