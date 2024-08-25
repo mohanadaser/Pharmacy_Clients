@@ -1,4 +1,4 @@
-// ignore_for_file: avoid_types_as_parameter_names, non_constant_identifier_names, prefer_const_constructors
+// ignore_for_file: avoid_types_as_parameter_names, non_constant_identifier_names, prefer_const_constructors, must_be_immutable
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -10,16 +10,9 @@ import '../../controller/clients_controller.dart';
 
 import 'login_screen.dart';
 
-class DebitClients extends StatefulWidget {
+class DebitClients extends StatelessWidget {
   const DebitClients({super.key});
 
-  @override
-  State<DebitClients> createState() => _ClientsScreenState();
-}
-
-class _ClientsScreenState extends State<DebitClients> {
-  int totalDebits = 0;
-  int sum = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
