@@ -1,3 +1,8 @@
+import 'dart:io';
+
+import 'package:pdf/pdf.dart';
+import 'package:pdf/widgets.dart' as pw;
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:flutter/material.dart';
@@ -15,11 +20,20 @@ class ClientsCode extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           title: const Text(
-            "اعرف رصيدك",
+            " اعرف رصيدك فى الصيدليه",
             style: TextStyle(
                 color: Colors.deepPurple, fontWeight: FontWeight.bold),
           ),
           centerTitle: true,
+          leading: IconButton(
+            onPressed: () {
+              Get.find<AddClientsController>().searchcode.text = "";
+              Get.find<AddClientsController>().update();
+              Get.back();
+            },
+            icon: const Icon(Icons.arrow_back_ios),
+            color: Colors.deepPurple,
+          ),
         ),
         body: GetBuilder<AddClientsController>(
           builder: (AddClientsController controller) => Directionality(
@@ -51,7 +65,7 @@ class ClientsCode extends StatelessWidget {
                           },
                           text: "كود العميل  ",
                           type: TextInputType.number,
-                          name: controller.searchname,
+                          name: controller.searchcode,
                           sufxicon: const Icon(Icons.search)),
                     ),
                   ),
@@ -108,7 +122,8 @@ class ClientsCode extends StatelessWidget {
                                 ),
                               );
                             }
-                          }))
+                          })),
+                  const SizedBox(height: 10),
                 ],
               ),
             ),

@@ -38,7 +38,7 @@ class MainScreen extends StatelessWidget {
                       onPressed: () {
                         Get.to(() => const ClientsCode());
                       },
-                      child: const Text('انا عميل',
+                      child: const Text('عميل صيدليه',
                           style: TextStyle(
                               fontSize: 18, fontWeight: FontWeight.bold))),
                   ElevatedButton(
@@ -49,7 +49,7 @@ class MainScreen extends StatelessWidget {
                       onPressed: () {
                         Get.to(() => const LoginScreen());
                       },
-                      child: const Text('انا صيدلى',
+                      child: const Text('الصيدليه',
                           style: TextStyle(
                               fontSize: 18, fontWeight: FontWeight.bold)))
                 ],

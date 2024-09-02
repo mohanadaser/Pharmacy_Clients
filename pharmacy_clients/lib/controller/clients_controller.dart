@@ -107,7 +107,7 @@ class AddClientsController extends GetxController {
         "goverment": goverment.text,
         "currentAmount": int.parse(amount.text),
         "company": selectedValue,
-        "clientid": currentuser,
+        "clientid": userid,
         "guid": randomInt.toString(),
         "device": deviceid
       });
