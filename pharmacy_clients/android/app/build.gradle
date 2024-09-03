@@ -48,7 +48,7 @@ android {
         // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration.
         minSdk = 30
         targetSdk = flutter.targetSdkVersion
-        versionCode = flutterVersionCode.toInteger()
+        versionCode = 2
         versionName = flutterVersionName
     }
     signingConfigs {
@@ -60,10 +60,10 @@ android {
         }
     }
     buildTypes {        
-        buildTypes {
+        
             release {
                 signingConfig signingConfigs.release
-                signingConfig signingConfigs.debug
+               
                
             }
            
@@ -71,7 +71,7 @@ android {
     }
 
     
-}
+
 
 flutter {
     source = "../.."
