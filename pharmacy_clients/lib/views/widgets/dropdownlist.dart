@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -66,7 +68,7 @@ class _FirebaseDropdownMenuItemState extends State<FirebaseDropdownMenuItem> {
               onChanged: (value) {
                 setState(() {
                   controller.selectedValue = value.toString();
-                  print(controller.selectedValue);
+                  log(controller.selectedValue);
                 });
               },
             );

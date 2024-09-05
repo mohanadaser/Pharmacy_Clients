@@ -12,6 +12,9 @@
 #     avoid_print: ignore
 #     depend_on_referenced_packages: ignore
 #     unused_local_variable: ignore
+analyzer:
+  errors:
+    unused_local_variable: ignore
 include: package:flutter_lints/flutter.yaml
 
 linter:
