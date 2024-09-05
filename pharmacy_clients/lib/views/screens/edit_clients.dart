@@ -4,7 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hexcolor/hexcolor.dart';
-import 'package:pharmacy_clients/views/widgets/client_transactions.dart';
+import 'package:pharmacy_clients/views/screens/client_transactions.dart';
 
 import '../../controller/clients_controller.dart';
 

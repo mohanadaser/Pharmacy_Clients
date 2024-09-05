@@ -15,7 +15,7 @@ class ClientTransactions extends StatefulWidget {
 class _ClientTransactionsState extends State<ClientTransactions> {
   DateTime? firstDate;
   DateTime? secDate;
-  TextEditingController name = TextEditingController();
+  //TextEditingController name = TextEditingController();
   //=========================================firstdate calender==============================
   Future pickFirstDate() async {
     final initialDate = DateTime.now();
@@ -83,21 +83,6 @@ class _ClientTransactionsState extends State<ClientTransactions> {
                       fontWeight: FontWeight.bold,
                       color: Colors.white),
                 ),
-                // Padding(
-                //   padding: const EdgeInsets.all(8.0),
-                //   child: CustomForm(
-                //       // ignore: body_might_complete_normally_nullable
-                //       onchange: (Value) {
-                //         //controller.searchClients(Value);
-                //         setState(() {
-                //           name.text = Value!;
-                //         });
-                //       },
-                //       text: "البحث عن عملاء الصيدليه  ",
-                //       type: TextInputType.name,
-                //       name: name,
-                //       sufxicon: const Icon(Icons.search)),
-                // ),
                 const SizedBox(
                   height: 20,
                 ),
@@ -194,24 +179,6 @@ class _ClientTransactionsState extends State<ClientTransactions> {
                               .collection("invoices")
                               .orderBy("date", descending: true)
                               .snapshots(),
-
-                      //.orderBy("date", descending: true)
-
-                      // .where("date",
-                      //     isGreaterThanOrEqualTo: firstDate.toString())
-                      // .where("date",
-                      //     isLessThanOrEqualTo: secDate.toString())
-                      // .where("date" == secDate.toString())
-
-                      // : FirebaseFirestore.instance
-                      //     .collectionGroup("invoices")
-                      //     .where("uid",
-                      //         isEqualTo: FirebaseAuth
-                      //             .instance.currentUser!.uid
-                      //             .toString())
-
-                      //     //.orderBy("date", descending: true)
-                      //     .snapshots(),
                       builder: (BuildContext context, AsyncSnapshot snapshot) {
                         if (snapshot.connectionState ==
                             ConnectionState.waiting) {
