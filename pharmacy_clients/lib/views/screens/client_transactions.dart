@@ -2,7 +2,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+
 import 'package:hexcolor/hexcolor.dart';
+import 'package:pharmacy_clients/Services/excel_services.dart';
+
+
 
 class ClientTransactions extends StatefulWidget {
   final String id;
@@ -240,7 +244,16 @@ class _ClientTransactionsState extends State<ClientTransactions> {
                               });
                         }
                       }),
-                )
+                ),
+                ElevatedButton(
+                    style:
+                        ElevatedButton.styleFrom(backgroundColor: Colors.black),
+                    onPressed: () => ExcelServices.exportDataToExcel(),
+                    child: const Text("تصدير حركات العميل الى ملف اكسل",
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 14)))
               ],
             )),
       )),
