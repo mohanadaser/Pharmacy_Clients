@@ -6,8 +6,6 @@ import 'package:flutter/services.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:pharmacy_clients/Services/excel_services.dart';
 
-
-
 class ClientTransactions extends StatefulWidget {
   final String id;
   const ClientTransactions({super.key, required this.id});
@@ -198,6 +196,7 @@ class _ClientTransactionsState extends State<ClientTransactions> {
                         } else {
                           return ListView.builder(
                               scrollDirection: Axis.vertical,
+                               
                               itemCount: snapshot.data!.docs.length,
                               shrinkWrap: true,
                               itemBuilder: (context, index) {
@@ -249,7 +248,7 @@ class _ClientTransactionsState extends State<ClientTransactions> {
                     style:
                         ElevatedButton.styleFrom(backgroundColor: Colors.black),
                     onPressed: () => ExcelServices.exportDataToExcel(),
-                    child: const Text("تصدير حركات العميل الى ملف اكسل",
+                    child: const Text("تصدير حركات العملاء الى ملف اكسل",
                         style: TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,

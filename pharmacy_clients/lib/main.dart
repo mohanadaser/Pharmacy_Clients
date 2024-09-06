@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hexcolor/hexcolor.dart';
 
+
 import 'package:pharmacy_clients/firebase_options.dart';
 
 import 'package:pharmacy_clients/views/screens/main_screen.dart';
@@ -20,6 +21,7 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   Get.put(AddClientsController());
+  
 
   runApp(const MyApp());
 }

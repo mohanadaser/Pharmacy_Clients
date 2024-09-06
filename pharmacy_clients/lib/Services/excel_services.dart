@@ -10,41 +10,39 @@ import 'package:get/get.dart';
 import 'package:path_provider/path_provider.dart' as path_provider;
 
 class ExcelServices {
-  static final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-
   static Future<void> exportDataToExcel() async {
+    List<QueryDocumentSnapshot> data = [];
     // Retrieve the data from Firebase
-    final QuerySnapshot querySnapshot = await _firestore
-        .collection('pharmacists')
-        .doc(FirebaseAuth.instance.currentUser?.uid)
-        .collection('clients')
-        .doc()
-        .collection('invoices')
+    final QuerySnapshot q = await FirebaseFirestore.instance
+        .collectionGroup("invoices")
+        .where('uid', isEqualTo: FirebaseAuth.instance.currentUser?.uid)
+        //.collection('pharmacists')
+        //.doc(FirebaseAuth.instance.currentUser?.uid)
+        //.collection('clients')
+        //.doc()
+        //.collection('invoices')
         .get();
-    final List<Map<String, dynamic>> data = querySnapshot.docs
-        .map((doc) => doc.data())
-        .toList()
-        .cast<Map<String, dynamic>>();
-    log(data.toString());
 
+    data.addAll(q.docs);
+    log('${data.length}');
     // Create an Excel file
     final Excel excel = Excel.createExcel();
     final Sheet sheet = excel.sheets['Sheet1']!;
 
     // Write the data to the Excel file
     for (int i = 0; i < data.length; i++) {
-      final Map<String, dynamic> row = data[i];
+      final QueryDocumentSnapshot<Object?> row = data[i];
       sheet
-          .cell(CellIndex.indexByColumnRow(columnIndex: 1, rowIndex: i + 1))
+          .cell(CellIndex.indexByColumnRow(columnIndex: 0, rowIndex: i + 1))
           .value = row['name'];
       sheet
-          .cell(CellIndex.indexByColumnRow(columnIndex: 2, rowIndex: i + 1))
+          .cell(CellIndex.indexByColumnRow(columnIndex: 1, rowIndex: i + 1))
           .value = row['type'];
       sheet
-          .cell(CellIndex.indexByColumnRow(columnIndex: 3, rowIndex: i + 1))
+          .cell(CellIndex.indexByColumnRow(columnIndex: 2, rowIndex: i + 1))
           .value = row['date'];
       sheet
-          .cell(CellIndex.indexByColumnRow(columnIndex: 4, rowIndex: i + 1))
+          .cell(CellIndex.indexByColumnRow(columnIndex: 3, rowIndex: i + 1))
           .value = row['cureAmount'];
     }
 
