@@ -17,7 +17,7 @@ class EditClients extends StatefulWidget {
   final String phone;
   final String company;
   final String goverment;
-  final int amount;
+  final double amount;
 
   const EditClients(
       {super.key,
@@ -92,7 +92,7 @@ class _EditClientsState extends State<EditClients> {
         "phone": phone.text,
         "company": company.text,
         "goverment": governorate.text,
-        "currentAmount": int.parse(amount.text),
+        "currentAmount": double.parse(amount.text),
         "device": Get.find<AddClientsController>().deviceid
       });
       Get.snackbar("Success", "تم التعديل بنجاح",
@@ -167,6 +167,7 @@ class _EditClientsState extends State<EditClients> {
                 ),
                 CustomForm(
                   type: TextInputType.number,
+                  readonly: true,
                   text: "",
                   name: amount,
                 ),

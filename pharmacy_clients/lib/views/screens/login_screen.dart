@@ -8,7 +8,7 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:hexcolor/hexcolor.dart';
 
-import 'package:pharmacy_clients/views/widgets/navbar.dart';
+import 'package:pharmacy_clients/views/screens/navbar.dart';
 
 import '../widgets/components.dart';
 

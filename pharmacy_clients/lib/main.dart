@@ -11,7 +11,7 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:pharmacy_clients/firebase_options.dart';
 
 import 'package:pharmacy_clients/views/screens/main_screen.dart';
-import 'package:pharmacy_clients/views/widgets/navbar.dart';
+import 'package:pharmacy_clients/views/screens/navbar.dart';
 
 import 'controller/clients_controller.dart';
 

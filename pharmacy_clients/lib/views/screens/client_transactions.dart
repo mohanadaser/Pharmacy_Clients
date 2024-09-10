@@ -163,6 +163,7 @@ class _ClientTransactionsState extends State<ClientTransactions> {
                               .collection("clients")
                               .doc(widget.id)
                               .collection("invoices")
+                              .orderBy("date", descending: true)
                               .where("date",
                                   isGreaterThanOrEqualTo:
                                       "${firstDate?.day}/${firstDate?.month}/${firstDate?.year}")
@@ -196,7 +197,6 @@ class _ClientTransactionsState extends State<ClientTransactions> {
                         } else {
                           return ListView.builder(
                               scrollDirection: Axis.vertical,
-                               
                               itemCount: snapshot.data!.docs.length,
                               shrinkWrap: true,
                               itemBuilder: (context, index) {

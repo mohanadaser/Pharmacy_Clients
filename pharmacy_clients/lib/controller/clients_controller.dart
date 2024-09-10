@@ -93,6 +93,11 @@ class AddClientsController extends GetxController {
     try {
       var random = Random();
       int randomInt = random.nextInt(10000);
+      if (selectedValue == "") {
+        Get.snackbar("faild", "يجب تحديد الشركه",
+            colorText: Colors.red, backgroundColor: Colors.white70);
+        return;
+      }
       //final uuid = const Uuid().v4();
       // final number = double.parse(amount.text);
       // final curency = NumberFormat.currency(locale: 'ar_EG', symbol: 'ج.م.');
@@ -105,7 +110,7 @@ class AddClientsController extends GetxController {
         "name": name.text,
         "phone": phone.text,
         "goverment": goverment.text,
-        "currentAmount": int.parse(amount.text),
+        "currentAmount": double.parse(amount.text),
         "company": selectedValue,
         "clientid": userid,
         "guid": randomInt.toString(),
