@@ -137,13 +137,13 @@ class DebitClients extends StatelessWidget {
                           .where("currentAmount", isLessThan: 0)
                           .snapshots(),
                       builder: (context, AsyncSnapshot snapshot) {
-                        int totamasrofat = 0;
-                        int sum = 0;
+                        double totamasrofat = 0;
+                        double sum = 0;
 
                         if (snapshot.hasData) {
                           for (var result in snapshot.data!.docs) {
                             sum = sum +
-                                int.parse(
+                                double.parse(
                                     result.data()['currentAmount'].toString());
                           }
                           totamasrofat = sum;
