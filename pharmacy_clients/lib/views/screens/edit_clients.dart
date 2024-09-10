@@ -167,7 +167,7 @@ class _EditClientsState extends State<EditClients> {
                 ),
                 CustomForm(
                   type: TextInputType.number,
-                  readonly: true,
+                  // readonly: true,
                   text: "",
                   name: amount,
                 ),

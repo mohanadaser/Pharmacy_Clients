@@ -52,24 +52,24 @@ class _AddInvoiceState extends State<AddInvoice> {
       batch.set(invoices.doc(), {
         "name": name.text,
         "type": "فاتورة بيع",
-        "cureAmount": int.parse(cureAmount.text),
+        "cureAmount": double.parse(cureAmount.text),
         "date": formattedDate,
         "uid": FirebaseAuth.instance.currentUser?.uid,
         "deviceid": Get.find<AddClientsController>().deviceid
       });
       batch.update(updateclient,
-          {"currentAmount": FieldValue.increment(-int.parse(cureAmount.text))});
+          {"currentAmount": FieldValue.increment(-double.parse(cureAmount.text))});
     } else {
       batch.set(invoices.doc(), {
         "name": name.text,
         "type": "رصيد علاج",
-        "cureAmount": int.parse(cureAmount.text),
+        "cureAmount": double.parse(cureAmount.text),
         "date": formattedDate,
         "uid": FirebaseAuth.instance.currentUser?.uid,
         "deviceid": Get.find<AddClientsController>().deviceid
       });
       batch.update(updateclient,
-          {"currentAmount": FieldValue.increment(int.parse(cureAmount.text))});
+          {"currentAmount": FieldValue.increment(double.parse(cureAmount.text))});
     }
     await batch.commit().then((_) {
       Get.snackbar("success", "تمت العملية بنجاح",
