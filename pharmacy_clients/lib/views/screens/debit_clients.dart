@@ -99,11 +99,10 @@ class DebitClients extends StatelessWidget {
                                 itemBuilder: (context, index) => Card(
                                   elevation: 5,
                                   child: ListTile(
-                                    leading: Image.network(
-                                      "https://cdn-icons-png.flaticon.com/512/149/149071.png",
-                                      width: 40,
-                                      height: 50,
-                                      fit: BoxFit.cover,
+                                    leading: Icon(
+                                      Icons.person,
+                                      color: Colors.deepPurple,
+                                      size: 40,
                                     ),
                                     title: Text(
                                       "${snapshot.data!.docs[index]['name']}",

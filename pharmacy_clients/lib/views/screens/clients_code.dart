@@ -79,6 +79,7 @@ class ClientsCode extends StatelessWidget {
                                   itemCount: snapshot.data!.docs.length,
                                   itemBuilder: (context, index) {
                                     return Container(
+                                      width: double.infinity,
                                       margin: const EdgeInsets.all(8.0),
                                       decoration: BoxDecoration(
                                           gradient: LinearGradient(colors: [
@@ -90,6 +91,11 @@ class ClientsCode extends StatelessWidget {
                                               BorderRadius.circular(13.0)),
                                       child: Card(
                                         child: ListTile(
+                                            leading: const Icon(
+                                              Icons.person,
+                                              color: Colors.deepPurple,
+                                              size: 40,
+                                            ),
                                             title: Text(snapshot
                                                 .data!.docs[index]['name']),
                                             trailing: Text(
