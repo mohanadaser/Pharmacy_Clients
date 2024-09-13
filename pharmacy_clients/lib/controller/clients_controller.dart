@@ -24,6 +24,7 @@ class AddClientsController extends GetxController {
   List<QueryDocumentSnapshot> data = [];
   DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
   String deviceid = "";
+
   //List<QueryDocumentSnapshot> clientslist = [];
   bool isLoading = true;
 
@@ -151,6 +152,26 @@ class AddClientsController extends GetxController {
       update();
     } catch (e) {
       Get.snackbar("faild", e.toString(), colorText: Colors.red);
+    }
+  }
+
+  //=====validate phone number is exist or not=================================
+  Future<List> getAllPhoneNumbers(val) async {
+    final collection = FirebaseFirestore.instance
+        .collection("Pharmacists")
+        .doc(FirebaseAuth.instance.currentUser?.uid)
+        .collection("clients");
+
+    final querySnapshot = await collection.get();
+
+    final phoneNumbers =
+        querySnapshot.docs.map((doc) => doc.data()['phone']).toList();
+    update();
+    print(phoneNumbers);
+    if (phoneNumbers.contains(val)) {
+      return [true];
+    } else {
+      return [false];
     }
   }
 }

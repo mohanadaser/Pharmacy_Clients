@@ -66,8 +66,12 @@ class AddClients extends StatelessWidget {
                         validator: (value) {
                           if (value!.isEmpty) {
                             return "ادخل رقم الهاتف";
+                          } else if (value.length < 11) {
+                            return "الرقم غير صحيح";
+                          } else {
+                            controller.getAllPhoneNumbers(value);
+                            return "الرقم موجود مسبقا";
                           }
-                          return null;
                         },
                         text: "رقم الهاتف",
                         formating: [LengthLimitingTextInputFormatter(11)],
