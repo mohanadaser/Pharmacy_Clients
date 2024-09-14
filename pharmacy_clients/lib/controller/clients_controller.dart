@@ -168,7 +168,7 @@ class AddClientsController extends GetxController {
 
     final phoneNumbers =
         querySnapshot.docs.map((doc) => doc.data()['phone']).toList();
-    print(phoneNumbers);
+  
     update();
     return phoneNumbers;
   }
