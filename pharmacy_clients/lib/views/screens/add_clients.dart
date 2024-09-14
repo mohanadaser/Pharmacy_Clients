@@ -4,15 +4,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:pharmacy_clients/Services/excel_services.dart';
 
 import '../../controller/clients_controller.dart';
 import '../widgets/alertdialog.dart';
 import '../widgets/components.dart';
 import '../widgets/dropdownlist.dart';
 
-class AddClients extends StatelessWidget {
+class AddClients extends StatefulWidget {
   const AddClients({super.key});
 
+  @override
+  State<AddClients> createState() => _AddClientsState();
+}
+
+class _AddClientsState extends State<AddClients> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -67,11 +73,13 @@ class AddClients extends StatelessWidget {
                           if (value!.isEmpty) {
                             return "ادخل رقم الهاتف";
                           } else if (value.length < 11) {
-                            return "الرقم غير صحيح";
-                          } else {
-                            controller.getAllPhoneNumbers(value);
-                            return "الرقم موجود مسبقا";
+                            return "الرقم غير مكتمل";
                           }
+                          // else if (controller.phones.contains(value)) {
+                          //   return "هذا الرقم موجود مسبقا";
+                          // }
+
+                          return null;
                         },
                         text: "رقم الهاتف",
                         formating: [LengthLimitingTextInputFormatter(11)],
@@ -128,11 +136,25 @@ class AddClients extends StatelessWidget {
                                 style: ElevatedButton.styleFrom(
                                     backgroundColor: Colors.deepPurple,
                                     foregroundColor: Colors.white),
-                                onPressed: () {
+                                onPressed: () async {
+                                  //============Add clients==========================
                                   if (controller.formKey.currentState!
                                       .validate()) {
-                                    controller.addClients(
-                                        snapshot.data?.docs[0]['uid']);
+                                    controller.formKey.currentState!.save();
+                                    //==========check phone number is exist or not======================
+                                    await controller
+                                        .getAllPhoneNumbers()
+                                        .then((value) {
+                                      if (value
+                                          .contains(controller.phone.text)) {
+                                        return Get.snackbar(
+                                            "خطأ", "رقم التليفون موجود بالفعل",
+                                            colorText: Colors.red);
+                                      } else {
+                                        controller.addClients(
+                                            snapshot.data?.docs[0]['uid']);
+                                      }
+                                    });
                                   }
                                 },
                                 child: const Text(

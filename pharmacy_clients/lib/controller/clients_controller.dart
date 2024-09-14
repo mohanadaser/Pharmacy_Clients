@@ -94,6 +94,8 @@ class AddClientsController extends GetxController {
     try {
       var random = Random();
       int randomInt = random.nextInt(10000);
+      String randomnumbers =
+          randomInt.toString().padLeft(4, '0'); //==accept 4 digits only
       if (selectedValue == "") {
         Get.snackbar("faild", "يجب تحديد الشركه",
             colorText: Colors.red, backgroundColor: Colors.white70);
@@ -114,7 +116,7 @@ class AddClientsController extends GetxController {
         "currentAmount": double.parse(amount.text),
         "company": selectedValue,
         "clientid": userid,
-        "guid": randomInt.toString(),
+        "guid": randomnumbers,
         "device": deviceid
       });
       clearController();
@@ -156,7 +158,7 @@ class AddClientsController extends GetxController {
   }
 
   //=====validate phone number is exist or not=================================
-  Future<List> getAllPhoneNumbers(val) async {
+  getAllPhoneNumbers() async {
     final collection = FirebaseFirestore.instance
         .collection("Pharmacists")
         .doc(FirebaseAuth.instance.currentUser?.uid)
@@ -166,12 +168,8 @@ class AddClientsController extends GetxController {
 
     final phoneNumbers =
         querySnapshot.docs.map((doc) => doc.data()['phone']).toList();
-    update();
     print(phoneNumbers);
-    if (phoneNumbers.contains(val)) {
-      return [true];
-    } else {
-      return [false];
-    }
+    update();
+    return phoneNumbers;
   }
 }
