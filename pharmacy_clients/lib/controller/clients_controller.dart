@@ -143,14 +143,18 @@ class AddClientsController extends GetxController {
 
   //==============================delete clients==============================
 
-  void deleteClients(id) async {
+  void deleteClients(docid) async {
     try {
-      await FirebaseFirestore.instance
+      final DocumentSnapshot document = await FirebaseFirestore.instance
           .collection("Pharmacists")
           .doc(currentuser)
           .collection("clients")
-          .doc(id)
-          .delete();
+          .doc(docid)
+          .get();
+      if (document.exists) {
+        await document.reference.delete();
+      }
+
       update();
     } catch (e) {
       Get.snackbar("faild", e.toString(), colorText: Colors.red);
@@ -168,7 +172,7 @@ class AddClientsController extends GetxController {
 
     final phoneNumbers =
         querySnapshot.docs.map((doc) => doc.data()['phone']).toList();
-  
+
     update();
     return phoneNumbers;
   }

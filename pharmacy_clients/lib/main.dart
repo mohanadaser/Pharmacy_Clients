@@ -7,7 +7,6 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hexcolor/hexcolor.dart';
 
-
 import 'package:pharmacy_clients/firebase_options.dart';
 
 import 'package:pharmacy_clients/views/screens/main_screen.dart';
@@ -21,13 +20,31 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   Get.put(AddClientsController());
-  
 
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  @override
+  void initState() {
+    FirebaseAuth.instance.authStateChanges().listen((User? user) {
+      if (user == null) {
+        log('=========User is currently signed out!');
+       
+      } else {
+        log('========User is signed in!');
+       
+      }
+    });
+    super.initState();
+  }
 
   // This widget is the root of your application.
   @override

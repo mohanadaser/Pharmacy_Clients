@@ -32,6 +32,8 @@ class ClientsScreen extends StatelessWidget {
         leading: IconButton(
           onPressed: () async {
             await FirebaseAuth.instance.signOut();
+            await FirebaseAuth.instance.currentUser?.delete();
+
             Get.offAll(() => const LoginScreen());
           },
           icon: const Icon(Icons.logout),
@@ -130,6 +132,7 @@ class ClientsScreen extends StatelessWidget {
                                     showCloseIcon: true,
                                   ).show();
                                 },
+                                //==============================================================
                                 child: Container(
                                   decoration: BoxDecoration(
                                     gradient: LinearGradient(colors: [
