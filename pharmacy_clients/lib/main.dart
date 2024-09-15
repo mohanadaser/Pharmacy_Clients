@@ -37,10 +37,8 @@ class _MyAppState extends State<MyApp> {
     FirebaseAuth.instance.authStateChanges().listen((User? user) {
       if (user == null) {
         log('=========User is currently signed out!');
-       
       } else {
         log('========User is signed in!');
-       
       }
     });
     super.initState();
@@ -76,6 +74,7 @@ class _MyAppState extends State<MyApp> {
             return const MainScreen();
           }
           if (snapshot.hasData) {
+           
             log(snapshot.data.toString());
             return const NavBar();
           }

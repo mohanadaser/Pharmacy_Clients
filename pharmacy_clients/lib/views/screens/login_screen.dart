@@ -1,5 +1,7 @@
 // ignore_for_file: must_be_immutable
 
+import 'dart:developer';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -35,6 +37,7 @@ class _LoginScreenState extends State<LoginScreen> {
   TextEditingController password = TextEditingController();
 
 //=========================================================================
+
   @override
   void initState() {
     email.text = localstorage.read("email") ?? "";
@@ -68,10 +71,17 @@ class _LoginScreenState extends State<LoginScreen> {
           isloading = true;
           setState(() {});
           // logging in user with email and password
-          await _auth.signInWithEmailAndPassword(
+          await _auth
+              .signInWithEmailAndPassword(
             email: email,
             password: password,
-          );
+          )
+              .then((userCredential) {
+            _auth.currentUser?.reload();
+            log("userCredential ${userCredential.user?.uid}");
+          }).catchError((e) {
+            log(e.toString());
+          });
 
           Get.offAll(() => const NavBar());
           setState(() {});
