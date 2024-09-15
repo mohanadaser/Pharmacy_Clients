@@ -32,17 +32,17 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  @override
-  void initState() {
-    FirebaseAuth.instance.authStateChanges().listen((User? user) {
-      if (user == null) {
-        log('=========User is currently signed out!');
-      } else {
-        log('========User is signed in!');
-      }
-    });
-    super.initState();
-  }
+  // @override
+  // void initState() {
+  //   FirebaseAuth.instance.authStateChanges().listen((User? user) {
+  //     if (user == null) {
+  //       log('=========User is currently signed out!');
+  //     } else {
+  //       log('========User is signed in!');
+  //     }
+  //   });
+  //   super.initState();
+  // }
 
   // This widget is the root of your application.
   @override
@@ -74,7 +74,6 @@ class _MyAppState extends State<MyApp> {
             return const MainScreen();
           }
           if (snapshot.hasData) {
-           
             log(snapshot.data.toString());
             return const NavBar();
           }

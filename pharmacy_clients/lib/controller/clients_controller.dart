@@ -143,7 +143,7 @@ class AddClientsController extends GetxController {
 
   //==============================delete clients==============================
 
-  void deleteClients(docid) async {
+  void deleteClients(docid, currentuser) async {
     try {
       final DocumentSnapshot document = await FirebaseFirestore.instance
           .collection("Pharmacists")

@@ -71,17 +71,16 @@ class _LoginScreenState extends State<LoginScreen> {
           isloading = true;
           setState(() {});
           // logging in user with email and password
-          await _auth
-              .signInWithEmailAndPassword(
+          await _auth.signInWithEmailAndPassword(
             email: email,
             password: password,
-          )
-              .then((userCredential) {
-            _auth.currentUser?.reload();
-            log("userCredential ${userCredential.user?.uid}");
-          }).catchError((e) {
-            log(e.toString());
-          });
+          );
+          //     .then((userCredential) {
+          //   _auth.currentUser?.reload();
+          //   log("userCredential ${userCredential.user?.uid}");
+          // }).catchError((e) {
+          //   log(e.toString());
+          // });
 
           Get.offAll(() => const NavBar());
           setState(() {});
