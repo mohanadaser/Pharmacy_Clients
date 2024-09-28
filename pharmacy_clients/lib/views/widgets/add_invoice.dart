@@ -57,8 +57,9 @@ class _AddInvoiceState extends State<AddInvoice> {
         "uid": FirebaseAuth.instance.currentUser?.uid,
         "deviceid": Get.find<AddClientsController>().deviceid
       });
-      batch.update(updateclient,
-          {"currentAmount": FieldValue.increment(-double.parse(cureAmount.text))});
+      batch.update(updateclient, {
+        "currentAmount": FieldValue.increment(-double.parse(cureAmount.text))
+      });
     } else {
       batch.set(invoices.doc(), {
         "name": name.text,
@@ -68,8 +69,9 @@ class _AddInvoiceState extends State<AddInvoice> {
         "uid": FirebaseAuth.instance.currentUser?.uid,
         "deviceid": Get.find<AddClientsController>().deviceid
       });
-      batch.update(updateclient,
-          {"currentAmount": FieldValue.increment(double.parse(cureAmount.text))});
+      batch.update(updateclient, {
+        "currentAmount": FieldValue.increment(double.parse(cureAmount.text))
+      });
     }
     await batch.commit().then((_) {
       Get.snackbar("success", "تمت العملية بنجاح",
@@ -103,7 +105,7 @@ class _AddInvoiceState extends State<AddInvoice> {
     return Directionality(
       textDirection: TextDirection.rtl,
       child: AlertDialog(
-        backgroundColor: HexColor("eeeeee"),
+        backgroundColor: Colors.white,
         actions: [
           const Center(
             child: Text(
@@ -167,7 +169,7 @@ class _AddInvoiceState extends State<AddInvoice> {
                     foregroundColor: Colors.white),
                 onPressed: () {
                   addInvoice();
-                  Get.to(() => const NavBar());
+                  Get.back();
                 },
                 child: const Text(
                   "حفظ",

@@ -186,34 +186,34 @@ class _EditClientsState extends State<EditClients> {
                       style:
                           TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                     )),
-                const SizedBox(height: 20.0),
+                // const SizedBox(height: 20.0),
                 //=================================فاتورة بيع==================================
-                ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.black,
-                        foregroundColor: Colors.white),
-                    onPressed: () {
-                      Get.dialog(AddInvoice(id: widget.id, name: widget.name));
-                    },
-                    child: const Text(
-                      " فاتورة بيع او رصيد علاج",
-                      style:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                    )),
-                const SizedBox(height: 20.0),
+                // ElevatedButton(
+                //     style: ElevatedButton.styleFrom(
+                //         backgroundColor: Colors.black,
+                //         foregroundColor: Colors.white),
+                //     onPressed: () {
+                //       Get.dialog(AddInvoice(id: widget.id, name: widget.name));
+                //     },
+                //     child: const Text(
+                //       " فاتورة بيع او رصيد علاج",
+                //       style:
+                //           TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                //     )),
+                // const SizedBox(height: 20.0),
                 //=================================اضافة علاج يومى او شهرى==================================
-                ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                        backgroundColor: HexColor('eeeeee'),
-                        foregroundColor: Colors.black),
-                    onPressed: () {
-                      Get.to(() => ClientTransactions(id: widget.id));
-                    },
-                    child: const Text(
-                      "عرض حركات العميل",
-                      style:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                    )),
+                // ElevatedButton(
+                //     style: ElevatedButton.styleFrom(
+                //         backgroundColor: HexColor('eeeeee'),
+                //         foregroundColor: Colors.black),
+                //     onPressed: () {
+                //       Get.to(() => ClientTransactions(id: widget.id));
+                //     },
+                //     child: const Text(
+                //       "عرض حركات العميل",
+                //       style:
+                //           TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                //     )),
               ])),
         ),
       ),

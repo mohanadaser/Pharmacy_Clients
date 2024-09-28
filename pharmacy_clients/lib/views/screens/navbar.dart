@@ -20,8 +20,10 @@ class _NavBarState extends State<NavBar> {
   ];
   @override
   Widget build(BuildContext context) {
-    return PopScope(
-      canPop: false,
+    return WillPopScope(
+      onWillPop: () {
+        return Future.value(false);
+      },
       child: Scaffold(
         body: pages[currentpage],
         bottomNavigationBar: BottomNavigationBar(

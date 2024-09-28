@@ -18,6 +18,7 @@ analyzer:
     deprecated_member_use: ignore
     unused_element: ignore
     duplicate_import: ignore
+    depend_on_referenced_packages: ignore
 include: package:flutter_lints/flutter.yaml
 
 linter:

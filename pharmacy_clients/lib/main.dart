@@ -52,6 +52,10 @@ class _MyAppState extends State<MyApp> {
       title: 'Flutter Demo',
 
       theme: ThemeData(
+        popupMenuTheme: const PopupMenuThemeData(
+          color: Colors.white,
+        ),
+       
         textTheme: GoogleFonts.cairoTextTheme(Theme.of(context).textTheme),
         canvasColor: Colors.white,
         scaffoldBackgroundColor: HexColor('efeee5'),
@@ -86,3 +90,5 @@ class _MyAppState extends State<MyApp> {
     );
   }
 }
+
+
