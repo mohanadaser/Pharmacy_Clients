@@ -3,12 +3,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:hexcolor/hexcolor.dart';
-import 'package:pharmacy_clients/views/screens/client_transactions.dart';
 
 import '../../controller/clients_controller.dart';
 
-import '../widgets/add_invoice.dart';
 import '../widgets/components.dart';
 
 class EditClients extends StatefulWidget {

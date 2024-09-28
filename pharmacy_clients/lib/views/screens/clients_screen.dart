@@ -9,7 +9,7 @@ import 'package:get/get.dart';
 import 'package:pharmacy_clients/views/screens/add_clients.dart';
 import 'package:pharmacy_clients/views/screens/client_transactions.dart';
 import 'package:pharmacy_clients/views/screens/edit_clients.dart';
-import 'package:flutter_animate/flutter_animate.dart';
+
 import '../../controller/clients_controller.dart';
 
 import '../widgets/add_invoice.dart';
@@ -147,7 +147,8 @@ class ClientsScreen extends StatelessWidget {
                                         elevation: 5,
                                         child: ListTile(
                                           leading: PopupMenuButton(
-                                              icon: const Icon(Icons.more_vert,
+                                              icon: const Icon(
+                                                  Icons.more_vert,
                                                   color: Colors.white),
                                               itemBuilder: (context) => [
                                                     const PopupMenuItem(
@@ -166,7 +167,11 @@ class ClientsScreen extends StatelessWidget {
                                                                     FontWeight
                                                                         .bold),
                                                           ),
-                                                          Icon(Icons.edit)
+                                                          Icon(
+                                                            Icons.edit,
+                                                            color: Colors
+                                                                .deepPurple,
+                                                          )
                                                         ],
                                                       ),
                                                     ),
@@ -195,47 +200,69 @@ class ClientsScreen extends StatelessWidget {
                                                     const PopupMenuItem(
                                                       value: 3,
                                                       child: Row(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .spaceBetween,
                                                         children: [
                                                           Text(
                                                               "اضافة فاتورة بيع او رصيد علاج",
                                                               style: TextStyle(
-                                                                  color:
-                                                                      Colors.black,
+                                                                  color: Colors
+                                                                      .black,
                                                                   fontWeight:
                                                                       FontWeight
                                                                           .bold)),
-                                                                          Icon(Icons.add)
+                                                          Icon(
+                                                            Icons.add,
+                                                            color:
+                                                                Colors.green,
+                                                          )
                                                         ],
                                                       ),
                                                     ),
                                                     const PopupMenuItem(
                                                       value: 4,
-                                                      child: Text(
-                                                          "عرض حركات العميل",
-                                                          style: TextStyle(
-                                                              color:
-                                                                  Colors.black,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .bold)),
+                                                      child: Row(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .spaceBetween,
+                                                        children: [
+                                                          Text(
+                                                              "عرض حركات العميل",
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .black,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold)),
+                                                          Icon(
+                                                            Icons
+                                                                .list_alt_outlined,
+                                                            color:
+                                                                Colors.orange,
+                                                          )
+                                                        ],
+                                                      ),
                                                     ),
                                                   ],
                                               onSelected: (value) {
                                                 if (value == 1) {
                                                   Get.to(() => EditClients(
-                                                      id: snapshot
-                                                          .data!.docs[index].id,
-                                                      name: snapshot.data!
-                                                          .docs[index]['name'],
-                                                      company: snapshot
-                                                              .data!.docs[index]
+                                                      id: snapshot.data!
+                                                          .docs[index].id,
+                                                      name: snapshot.data!.docs[index]
+                                                          ['name'],
+                                                      company: snapshot.data!
+                                                              .docs[index]
                                                           ['company'],
-                                                      phone: snapshot.data!
-                                                          .docs[index]['phone'],
-                                                      amount: snapshot.data!.docs[index]
+                                                      phone: snapshot.data!.docs[index]
+                                                          ['phone'],
+                                                      amount: snapshot.data!
+                                                              .docs[index]
                                                           ['currentAmount'],
                                                       goverment: snapshot
-                                                              .data!.docs[index]
+                                                              .data!
+                                                              .docs[index]
                                                           ['goverment']));
                                                 } else if (value == 2) {
                                                   AwesomeDialog(
@@ -251,11 +278,15 @@ class ClientsScreen extends StatelessWidget {
                                                       Get.back();
                                                     },
                                                     btnOkOnPress: () {
-                                                      controller.deleteClients(
-                                                          snapshot.data!
-                                                              .docs[index].id,
-                                                          snap.data!.docs[0]
-                                                              ['uid']);
+                                                      controller
+                                                          .deleteClients(
+                                                              snapshot
+                                                                  .data!
+                                                                  .docs[index]
+                                                                  .id,
+                                                              snap.data!
+                                                                      .docs[0]
+                                                                  ['uid']);
                                                     },
                                                     buttonsTextStyle:
                                                         const TextStyle(
@@ -265,18 +296,20 @@ class ClientsScreen extends StatelessWidget {
                                                   ).show();
                                                 } else if (value == 3) {
                                                   Get.dialog(AddInvoice(
-                                                      id: snapshot
-                                                          .data!.docs[index].id,
-                                                      name: snapshot
-                                                              .data!.docs[index]
+                                                      id: snapshot.data!
+                                                          .docs[index].id,
+                                                      name: snapshot.data!
+                                                              .docs[index]
                                                           ['name']));
                                                 }
-
+                                          
                                                 if (value == 4) {
                                                   Get.to(() =>
                                                       ClientTransactions(
-                                                          id: snapshot.data!
-                                                              .docs[index].id));
+                                                          id: snapshot
+                                                              .data!
+                                                              .docs[index]
+                                                              .id));
                                                 }
                                               }),
                                           title: Text(
