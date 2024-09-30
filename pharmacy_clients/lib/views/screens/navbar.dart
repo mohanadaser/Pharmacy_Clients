@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hexcolor/hexcolor.dart';
 import 'package:pharmacy_clients/views/screens/clients_screen.dart';
 import 'package:pharmacy_clients/views/screens/debit_clients.dart';
 
@@ -27,6 +28,7 @@ class _NavBarState extends State<NavBar> {
       child: Scaffold(
         body: pages[currentpage],
         bottomNavigationBar: BottomNavigationBar(
+          selectedItemColor: HexColor("191919"),
           selectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold),
           unselectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold),
           type: BottomNavigationBarType.fixed,
