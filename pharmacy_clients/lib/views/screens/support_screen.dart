@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:url_launcher/url_launcher_string.dart';
+import 'package:flutter_share/flutter_share.dart';
 
 class SupportScreen extends StatelessWidget {
   const SupportScreen({super.key});
@@ -18,7 +19,19 @@ class SupportScreen extends StatelessWidget {
   }
 
 //==============================================================================
+//================================Share App====================================
+  Future<void> shareApp() async {
+    // Set the app link and the message to be shared
+    const String appLink =
+        'https://play.google.com/store/apps/details?id=com.mohaa.pharmacy_clients';
+    const String message = 'Check out my new app: $appLink';
 
+    // Share the app link and message using the share dialog
+    await FlutterShare.share(
+        title: 'Share App', text: message, linkUrl: appLink);
+  }
+
+//=========================================================================================
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -64,10 +77,34 @@ class SupportScreen extends StatelessWidget {
                 ),
                 const Text(
                   "اضغط هنا",
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(
+                      color: Colors.white, fontWeight: FontWeight.bold),
                 ),
               ],
-            )
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                IconButton(
+                  onPressed: () {
+                    shareApp();
+                  },
+                  icon: const Icon(
+                    Icons.share,
+                    size: 40,
+                  ),
+                  color: Colors.white,
+                ),
+                const Text(
+                  " مشاركة التطبيق مع الغير",
+                  style: TextStyle(
+                      color: Colors.white, fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
           ],
         ),
       ),
